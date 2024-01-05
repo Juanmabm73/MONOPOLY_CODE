@@ -25,7 +25,10 @@ public class Property extends MonopolyCode {
         String response;
         terminal.show("You are in your property what do you want to do?");
         terminal.show("1. Mortgage property");
-        terminal.show("2. Sell property");
+        terminal.show("2. Nothing");
+        if (isMortaged()) {
+            terminal.show("3. Unmortgage");
+        }
         int option = scanner.nextInt();
 
         switch (option) {
@@ -43,24 +46,20 @@ public class Property extends MonopolyCode {
 
                 break;
             case 2:
-                terminal.show("You are going to sell your property for: " + getPrice() / 2 + "euros");
-                terminal.show("Do you want to continue (yes/no)");
-                response = scanner.nextLine();
-                if (response.equalsIgnoreCase("yes")) {
-                    sellProperty(player, getPrice(), terminal);
-                    terminal.show("Sold Property");
-                } else {
-                    terminal.show("Operation Canceled");
-                }
+                terminal.show("No opperation");
+                
                 break;
-        }
+            case 3: 
+                terminal.show("You are going to unmortgaged your property for" + (getMortgageValue() + (int) 0.1*getMortgageValue()));
+                terminal.show("Confirm opperation (0 = no/ 1 = yes)");
+                num = scanner.nextInt();
+                if (num == 1){
+                    player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal);
+                }
+        }   
     }
 
-    public void sellProperty(Player player, int price, Terminal terminal) {
-        player.setBalance(player.getBalance() + price / 2);
-        setOwner(null);
-        player.getProperties().remove(this);
-    }
+    
 
     
 

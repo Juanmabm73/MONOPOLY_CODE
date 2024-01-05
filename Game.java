@@ -15,7 +15,7 @@ public class Game implements SerializableI {
 
     
   
-    public void loadMonopolyCodes()  {
+    private void loadMonopolyCodes()  {
         BufferedReader reader = null;
         try { reader = new BufferedReader(new FileReader("./files/properties.txt"));
             String line;
@@ -54,7 +54,7 @@ public class Game implements SerializableI {
 
     }
 
-    public void createPlayers() {
+    private void createPlayers() {
         Scanner scanner = new Scanner(System.in);
 
             for (int i = 0; i < 4; i++) {
@@ -66,9 +66,11 @@ public class Game implements SerializableI {
             
         }
 
-    public void play(Game game) {
+    public void play() {
         Scanner scanner = new Scanner(System.in);
-        
+        Game game = new Game(terminal);
+        createPlayers();
+        loadMonopolyCodes();
         while (playerArray.length > 1) {
             
             
@@ -96,8 +98,10 @@ public class Game implements SerializableI {
             terminal.show("### ### ### ### ###");
 
             for (Player player : getPlayerArray()) {
-                terminal.show(player.toString()+ " balance: " + player.getBalance() + ". Properties: ");
-                player.resume(game, terminal, player);
+                if (player != null){
+                    terminal.show(player.toString()+ " balance: " + player.getBalance() + ". Properties: ");
+                    player.resume(terminal, player);
+                }
             }
 
             
@@ -115,37 +119,21 @@ public class Game implements SerializableI {
         //fin del while
     } //fin del metodo
 
-    private void removePlayer(){  //CAMBIAR METODO Y CONTROLAR JUGADORES NULOS
-        // private void removePlayer(){
-        //     for (int i = 0; i < getPlayerArray().length; i++){
-        //         if(getPlayerArray()[i].isBankrupt()){
-        //             getPlayerArray()[i] = null;
-        //             break;
-        //         }
-        //     }
-        // }
-        int numNotBankrupt = 0;
-        
-        for (Player player: getPlayerArray()){
-            if(!player.isBankrupt()){
-                numNotBankrupt++;
+   //CAMBIAR METODO Y CONTROLAR JUGADORES NULOS
+    private void removePlayer(){
+        for (int i = 0; i < getPlayerArray().length; i++){
+            if((getPlayerArray()[i] != null) && (getPlayerArray()[i].isBankrupt())){
+                getPlayerArray()[i] = null;
+                terminal.show("Player " + (i+1) + " is bankrupt and has been removed from the game");
+                break;
             }
         }
-
-        Player [] playerArray = new Player[numNotBankrupt];
-        int index = 0;
-        for (Player player: getPlayerArray()){
-            if (!player.isBankrupt()){
-                playerArray[index++] =player; //mete a todos los jugadores q no esten en banca rota
-            }
-        }
-
-        setPlayerArray(playerArray);
-        
-
-        
-
     }
+        
+
+
+        
+
     
     
     public MonopolyCode[] getMonopolyCodeArray() {

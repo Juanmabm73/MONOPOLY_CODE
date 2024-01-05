@@ -5,9 +5,8 @@ public class MonopolyBank {
         // gameManager.start();
         // gameManager.askForResumeGame(tt);
         Game game =new Game(tt);
-        game.loadMonopolyCodes();
-        game.createPlayers();
-        game.play(game);
+        
+        game.play();
 
         
     }

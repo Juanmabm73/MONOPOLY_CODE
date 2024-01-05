@@ -17,7 +17,7 @@ public class Player implements SerializableI {
         properties = new ArrayList<>();
     }
 
-    public void resume(Game game ,Terminal terminal, Player player){
+    public void resume(Terminal terminal, Player player){
         
             for (Property properties : player.getProperties()) {
                 if (properties instanceof Street){
@@ -65,6 +65,7 @@ public class Player implements SerializableI {
         showList(terminal);
         terminal.show("Choose your Property id from list");
         int num = scanner.nextInt();
+        scanner.nextLine();
         if (canSell(num)) { //esto decide entre vender e hipotecar 
             Property property = getProperties().get(num);
             if (property instanceof Street) {
@@ -83,12 +84,13 @@ public class Player implements SerializableI {
                     street.setBuiltHouses(street.getBuiltHouses() - number);
             }
         } else { 
-            terminal.show("There isn't things to sell on this property we are going to Mortgage");
+            terminal.show("We are going to Mortgage");
             Property property = getProperties().get(num);
             propertyValue = property.getMortgageValue();
             sales += property.getMortgageValue();
             setBalance(getBalance() + propertyValue);
             property.setMortaged(true);
+            
         }
     }
 
@@ -96,15 +98,16 @@ public class Player implements SerializableI {
         Scanner scanner = new Scanner(System.in);
         
         if (mandatory){
+        while (getBalance() < target) {
             if (thereAreThingsToSell() == false) {
                     setBankrupt(true);
-
-                }
-        
-            while (getBalance() < target && thereAreThingsToSell()){
-                sellOrMortgaged(terminal);
+                    break;
+            } else{
+                    terminal.show("You need to mortgage");
+                    sellOrMortgaged(terminal);
                 
             }
+        }
         } else {
             do{
                 sellOrMortgaged(terminal);
@@ -118,7 +121,8 @@ public class Player implements SerializableI {
     }
 
     private boolean canSell(int num){ //comprueba si hay cosas para vender en la propiedad
-        Property property = getProperties().get(num); //coge la propiedad con el num que es el id de la propiedad 
+        System.out.println(num);
+        Property property = getProperties().get(num); //coge la propiedad con el num que es el id que hemos creado
             if (property instanceof Street ) {
                 Street street = (Street) property;
                 return street.getBuiltHouses() > 0;  // devuelve true si 
@@ -132,7 +136,7 @@ public class Player implements SerializableI {
             if (properties instanceof Street) {
                 Street street = (Street) properties;
             
-                if(!properties.isMortaged() || street.getBuiltHouses() > 0 ){
+                if(!properties.isMortaged() && street.getBuiltHouses() > 0 ){
                     return true;
                 }
 
@@ -145,32 +149,43 @@ public class Player implements SerializableI {
     }
 
     private void showList(Terminal terminal) {
+        int index = 0;
         
         terminal.show("List of properties with posible sales");
         for (Property property : this.properties) {
             if (property instanceof Street){
                 Street street = (Street) property;
                 if (street.getBuiltHouses()>0){
-                    terminal.show("Id: " + street.getId() + street.toString() + "Built Houses: " + street.getBuiltHouses() + "Sell price: " + street.getCostStayingWithHouses()[4]/2);
+                    terminal.show("Id: " + index + " " + street.toString() + "Built Houses: " + street.getBuiltHouses() + "Sell price: " + street.getCostStayingWithHouses()[4]/2);
                 }
             }
-            
+            index++;
         }
-
+        index = 0;
         
         terminal.show("List of properties with posible mortgage");
         for (Property property : this.properties) {
             if (property instanceof Street){
                 Street street =  (Street) property;
                 if (street.getBuiltHouses() == 0) {
-                    terminal.show("Id: " + property.getId() +" " +street.toString() + "Mortgage Value: " + street.getMortgageValue());
+                    terminal.show("Id: " + index + " " + street.toString() + "Mortgage Value: " + street.getMortgageValue());
                 }
             } else if (property instanceof Service || property instanceof Transport) {
-                terminal.show("Id: " + property.getId() + " " + property.toString() + "Mortgage Value: " + property.getMortgageValue());
+                terminal.show("Id: " + index + " " + property.toString() + "Mortgage Value: " + property.getMortgageValue());
             }
+        index++;
         }
     }
 
+    public void traspaseProperties(Player newOwner){
+        for(Property properties : getProperties()) {
+            newOwner.getProperties().add(properties);
+            properties.setOwner(newOwner);
+            // traspaso de las propiedades pero todas hipotecadas revisar
+
+        }
+
+    }
     
     @Override
     public String toString() {

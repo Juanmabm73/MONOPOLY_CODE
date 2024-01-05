@@ -57,6 +57,10 @@ public class Street extends Property{
                 terminal.show("NUMERO DE CASAS: "+getBuiltHouses() + "PRECIO: " + getCostStayingWithHouses()[getBuiltHouses()]);
                 player.pay(getCostStayingWithHouses()[getBuiltHouses()], true, terminal); //lo mandas a pago obligatorio
                 getOwner().setBalance(getOwner().getBalance() + getCostStayingWithHouses()[getBuiltHouses()]); //dueño recibe
+                if (player.isBankrupt()){
+                    player.traspaseProperties(getOwner());
+                    terminal.show(player.toString() + " transferred his properties to " + getOwner().toString());
+                }
                 showPaymentSummary(getCostStayingWithHouses()[getBuiltHouses()], player, terminal);
             }
             
@@ -133,8 +137,7 @@ public class Street extends Property{
                 break;
             case 3: 
                 if (getBuiltHouses() == 0){
-                    terminal.show("You don't have any house to sell do you want to sell your property? (yes/no)");
-                    sellProperty(player, getPrice(), terminal);
+                    terminal.show("You don't have any house to sell");
                 } else {
                     do{
                         terminal.show("You have " + getBuiltHouses() + " houses to sell");
@@ -149,6 +152,7 @@ public class Street extends Property{
 
                     if (response.equalsIgnoreCase("yes")){
                         player.pay(-(getHousePrice()/2 * num), false, terminal);
+                        setBuiltHouses(getBuiltHouses() - num);
                     } else {
                         terminal.show("Operation cancelled");
                     }
