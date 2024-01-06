@@ -71,7 +71,7 @@ public class Game implements SerializableI {
         Game game = new Game(terminal);
         createPlayers();
         loadMonopolyCodes();
-        while (playerArray.length > 1) {
+        while (playerArray.length >= 2) { //cambiar para que cuente los null
             
             
             terminal.show("Enter card code");
@@ -82,8 +82,12 @@ public class Game implements SerializableI {
             for (int i = 0; i < getMonopolyCodeArray().length; i++) {
                 if (getMonopolyCodeArray()[i] != null && getMonopolyCodeArray()[i].getId() == id)  {
                     terminal.show(getMonopolyCodeArray()[i].toString());
-                    getMonopolyCodeArray()[i].doOperation(getPlayerArray()[playerId - 1],terminal); //posicion del array no indice
-                    break;
+                    if(getPlayerArray()[playerId-1] != null){
+                        getMonopolyCodeArray()[i].doOperation(getPlayerArray()[playerId - 1],terminal); //posicion del array no indice
+                        break;
+                    } else{
+                        terminal.show("This player is elimnated");
+                    }
                     
                 }
             }
