@@ -1,12 +1,12 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Service extends Property {
     private int [] costStaying = new int[2];
     
     // 12;SERVICE;COMPAÑÍA DE ELECTRICIDAD;4;10;75
     public Service( String [] segment, Terminal terminal) {
-        super(Integer.parseInt(segment[0]), segment[2], terminal, Integer.parseInt(segment[3]), false, Integer.parseInt(segment[5]));
+        super(Integer.parseInt(segment[0]), segment[2],  terminal, Integer.parseInt(segment[3]), false, Integer.parseInt(segment[5]));
         for (int i = 0; i < 1; i++) {
             costStaying[i] = Integer.parseInt(segment[i+3]);
         }
@@ -14,13 +14,16 @@ public class Service extends Property {
 
     @Override
     public void doOperation(Player player, Terminal terminal) {
-        String response;
-        Scanner scanner = new Scanner(System.in);
+        int response;
+        
         if (getOwner() == null) {
             terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros your balance will be " + (player.getBalance() - getPrice()) + " euros to buy the property" + getDescription());
-            terminal.show("For accept enter yes for cancel enter no");
-            response = scanner.nextLine();
-            if (response.equalsIgnoreCase("yes")) {
+            terminal.show("For accept enter 1 for cancel enter 0.");
+            do{
+                response = terminal.read();
+            } while ((response == 0) && (response == 1));
+            
+            if (response == 1) {
                 player.pay(getPrice(),false, terminal);
                 setOwner(player);
 
@@ -31,7 +34,7 @@ public class Service extends Property {
                 player.getProperties().add(this);
                 setOwner(player);
             
-            } else if (response.equalsIgnoreCase("no")){
+            } else if (response == 0){
                 terminal.show("Operation canceled");
             }
             showPurchaseSummary(getPrice(), player, terminal);
@@ -49,8 +52,7 @@ public class Service extends Property {
             terminal.show("You are in " + getOwner() +  " property");
             do{
                 terminal.show("What number did you get on the dice");
-                dice = scanner.nextInt();
-                scanner.nextLine();
+                dice = terminal.read();
             
             } while(dice<1 && dice>6);
             

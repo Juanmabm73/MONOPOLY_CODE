@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 public class Property extends MonopolyCode {
     private int price;
@@ -20,27 +20,31 @@ public class Property extends MonopolyCode {
     }
 
     public void doOwnerOperation(Player player, Terminal terminal) {
-        Scanner scanner = new Scanner(System.in);
-        int num;
-        String response;
+        
+        
+        int response;
         terminal.show("You are in your property what do you want to do?");
         terminal.show("1. Mortgage property");
         terminal.show("2. Nothing");
         if (isMortaged()) {
             terminal.show("3. Unmortgage");
         }
-        int option = scanner.nextInt();
+
+        int option = terminal.read();
 
         switch (option) {
             case 1:
 
                 terminal.show("You are going to mortgaged your property for: " + getMortgageValue() + "euros");
-                terminal.show("Do you want to continue (yes/no)");
-                response = scanner.nextLine();
-                if (response.equalsIgnoreCase("yes")) {
+                terminal.show("Do you want to continue (1 = yes/ 0 = no)");
+                do {
+                    response = terminal.read();
+                } while ((response == 0) && (response == 1));
+
+                if (response == 1) {
                     player.setBalance(player.getBalance() + getMortgageValue());
                     setMortaged(true);
-                } else {
+                } else if (response == 0){
                     terminal.show("Operation Canceled");
                 }
 
@@ -52,12 +56,17 @@ public class Property extends MonopolyCode {
             case 3: 
                 terminal.show("You are going to unmortgaged your property for" + (getMortgageValue() + (int) 0.1*getMortgageValue()));
                 terminal.show("Confirm opperation (0 = no/ 1 = yes)");
-                num = scanner.nextInt();
-                if (num == 1){
+                do {
+                    response = terminal.read();
+                } while ((response == 0) && (response == 1));
+                if ( response == 1){
                     player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal);
+                } else {
+                    terminal.show("Operation cancelled");
                 }
-        }   
-    }
+            }
+    }   
+    
 
     
 

@@ -67,7 +67,7 @@ public class Game implements SerializableI {
         }
 
     public void play() {
-        Scanner scanner = new Scanner(System.in);
+        
         Game game = new Game(terminal);
         createPlayers();
         loadMonopolyCodes();
@@ -75,12 +75,9 @@ public class Game implements SerializableI {
             
             
             terminal.show("Enter card code");
-            int id = scanner.nextInt();
-            scanner.nextLine();
+            int id = terminal.read();
             terminal.show("Enter player id");
-            int playerId = scanner.nextInt();
-            scanner.nextLine();
-
+            int playerId = terminal.read();
 
             for (int i = 0; i < getMonopolyCodeArray().length; i++) {
                 if (getMonopolyCodeArray()[i] != null && getMonopolyCodeArray()[i].getId() == id)  {
@@ -103,20 +100,7 @@ public class Game implements SerializableI {
                     player.resume(terminal, player);
                 }
             }
-
-            
-            
-          
-
-        }
-
-
-          
-        
-        
-            
-
-        //fin del while
+        } //fin del while
     } //fin del metodo
 
    //CAMBIAR METODO Y CONTROLAR JUGADORES NULOS

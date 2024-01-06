@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Street extends Property{
     private int builtHouses;
@@ -17,21 +17,25 @@ public class Street extends Property{
     }
 
     
-    public String toDetailedString(){
+    public String toDetailedString(){ // se usa para mostrar el resumen general
         return super.toString() + " houses: " + getBuiltHouses() + ". Mortgaged: " + isMortaged() ;
     }
+
+
     @Override
     public void doOperation(Player player, Terminal terminal) {
-        Scanner scanner = new Scanner(System.in);
         
+        int response;
 
         if (getOwner() == null) {
             
             terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros for " + getDescription() + " your balance will be " + (player.getBalance() - getPrice()) + " euros");
-            terminal.show("For accept enter yes for cancel enter no");
-            String response = scanner.nextLine();
+            terminal.show("For accept enter 1 for cancel enter 0");
+            do {
+                response = terminal.read();
+            } while ((response != 0) && (response != 1));
 
-            if (response.equalsIgnoreCase("yes"))  {
+            if (response == 1)  {
                 player.pay(getPrice(), false, terminal); //no es obligatorio
 
                 if (player.getProperties() == null) {
@@ -41,7 +45,7 @@ public class Street extends Property{
                 player.getProperties().add(this);
                 setOwner(player);
             
-            } else if (response.equalsIgnoreCase("no")){
+            } else if (response == 0){
                 terminal.show("Operation canceled");
             }
 
@@ -73,29 +77,32 @@ public class Street extends Property{
 
     @Override
     public void doOwnerOperation(Player player, Terminal terminal) {
-        Scanner scanner = new Scanner(System.in);
-        int num;
-        String response;
+        int response;
+        int num;// para el numero de casas
+        
         terminal.show("You are in your property what do you want to do?");
         terminal.show("1. Mortgage property");
         terminal.show("2. Buy houses or Hotels");
         if (getBuiltHouses() > 0){
             terminal.show("3. Sell Houses of the Property");
         }
-        int option = scanner.nextInt();
-        scanner.nextLine();
+        int option = terminal.read();
+        
         
         switch (option) {
             case 1:
                 if (getBuiltHouses() == 0) {
                     terminal.show("You are going to mortgaged your property for: " + getMortgageValue() + "euros");
-                    terminal.show("Do you want to continue (yes/no)");
-                    response = scanner.nextLine();
-                    if (response.equalsIgnoreCase("yes")){
+                    terminal.show("Do you want to continue (1 = yes/ 0 = no)");
+                    do {
+                        response = terminal.read();
+                    } while ((response != 0) && (response != 1));
+
+                    if (response == 1){
                         player.setBalance(player.getBalance() + getMortgageValue());
                         setMortaged(true);
 
-                    } else {
+                    } else if (response  == 0) {
                         terminal.show("Operation Canceled");
                     }
                 } else {
@@ -106,29 +113,34 @@ public class Street extends Property{
                 terminal.show("At this moment you have " + getBuiltHouses() + " houses");
                 if (getBuiltHouses() == 4) {
                     terminal.show("You can only buy a Hotel for: " + getHousePrice() + "euros" );
-                    terminal.show("Do you want to continue (yes/no)");
-                    response = scanner.nextLine();
-                    if (response.equalsIgnoreCase("yes")){
+                    terminal.show("Do you want to continue (1 = yes/ 0= no)");
+                    do {
+                        response = terminal.read();
+                    } while ((response != 0)  && (response != 1));
+
+                    if (response == 1){
                         player.pay(getHousePrice(), false, terminal);
                         setBuiltHouses(5);
-                    } else {
+                    } else if (response == 0){
                         terminal.show("Operation cancelled");
                     }
                 } else if (getBuiltHouses() < 4) {
                     do{
                         terminal.show("You can buy " + (4-getBuiltHouses()) + " houses");
                         terminal.show("How many houses do you want to buy");
-                        num = scanner.nextInt();
-                        scanner.nextLine();
+                        num = terminal.read();
+                        
                     } while ((num<=1) && (num >= 4-getBuiltHouses()));
                     terminal.show("You are going to buy " + num + " houses for " + num*getHousePrice());
-                    terminal.show("Do you accept operation (yes/no)");
-                    response = scanner.nextLine();
-                    if (response.equalsIgnoreCase("yes")){
+                    terminal.show("Do you accept operation ( 1 = yes / 0 = no)");
+                    do {
+                        response = terminal.read();
+                    } while ((response != 0) && (response != 1));
+                    if (response == 1){
                         player.pay(num*getHousePrice(), false, terminal);
                         setBuiltHouses(getBuiltHouses() + num);
                         showPurchaseSummary(num, player, terminal);
-                    } else {
+                    } else {    
                         terminal.show("Operation canceled");
                     }
                 } else {
@@ -142,15 +154,16 @@ public class Street extends Property{
                     do{
                         terminal.show("You have " + getBuiltHouses() + " houses to sell");
                         terminal.show("How many houses do you want to sell");
-                        num = scanner.nextInt();
-                        scanner.nextLine();
+                        num = terminal.read();
                     } while(num<= 1 && num >= getBuiltHouses());
 
                     terminal.show("You are going to sell" + num + " houses for " + "your balance will be" + player.getBalance()+(getHousePrice()/2 * num));
-                    terminal.show("Do you want to continue (yes/no)");
-                    response = scanner.nextLine();
+                    terminal.show("Do you want to continue (1 = yes/0 = no)");
+                    do {
+                        response = terminal.read();
+                    } while ((response != 0) && (response != 1));
 
-                    if (response.equalsIgnoreCase("yes")){
+                    if (response == 1){
                         player.pay(-(getHousePrice()/2 * num), false, terminal);
                         setBuiltHouses(getBuiltHouses() - num);
                     } else {

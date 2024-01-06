@@ -12,16 +12,16 @@ public class TextTerminal extends Terminal {
         
     } 
 
+    @Override
     public int read() {
+        
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
+        scanner.nextLine(); // para limpiar el scanner
         
-        scanner.close();
-
+        
 
         return option;
-
-
         
     }
    

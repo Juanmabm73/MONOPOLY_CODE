@@ -32,7 +32,6 @@ public class RepairsCard extends MonopolyCode {
         for (Property property : player.getProperties()) {
             if (property instanceof Street) {
                 Street street = (Street) property;
-                
                 if (street.getBuiltHouses() <= 4) {
                     total += street.getBuiltHouses() * this.amountForHouse;
                 } else {
@@ -44,7 +43,7 @@ public class RepairsCard extends MonopolyCode {
     player.pay(total, true, terminal);
     // total -= player.getBalance();
     // player.setBalance(total);
-    System.out.println(player.getBalance());
+    terminal.show(player.getBalance() + "");
     }
 
     public int getAmountForHouse() {

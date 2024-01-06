@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Transport extends Property{
     private int[] costStaying = new int [4] ;
@@ -15,13 +15,15 @@ public class Transport extends Property{
 
     @Override
     public void doOperation(Player player, Terminal terminal) {
-        String response;
-        Scanner scanner = new Scanner(System.in);
+        int response;
+       
         if (getOwner() == null) {
             terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros your balance will be " + (player.getBalance() - getPrice()) + " euros to buy the property");
-            terminal.show("For accept enter yes for cancel enter no");
-            response = scanner.nextLine();
-            if (response.equalsIgnoreCase("yes")) {
+            terminal.show("For accept enter 1 for cancel enter 0");
+            do{
+                response = terminal.read();
+            } while (response != 0 || response != 1);
+            if (response == 1) {
                 player.pay(getPrice(),false, terminal);
                 setOwner(player);
 
@@ -33,7 +35,7 @@ public class Transport extends Property{
                 setOwner(player);
             showPurchaseSummary(getPrice(), player, terminal);
             
-            } else if (response.equalsIgnoreCase("no")){
+            } else if (response == 0) {
                 terminal.show("Operation canceled");
             }
         } else if (getOwner() != player) {
