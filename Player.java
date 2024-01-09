@@ -42,7 +42,7 @@ public class Player implements SerializableI {
                 if (response.equalsIgnoreCase("yes")){
                     sellActives(price, false, terminal);
                 } else {
-                    terminal.show("Operation cancelled");
+                    terminal.show("Operation cancelled"); 
                 }                    
             }
         } else if (mandatory == true) {
@@ -232,10 +232,6 @@ public class Player implements SerializableI {
 
     public int getPlayerId() {
         return playerId;
-    }
-
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
     }
 
     public ArrayList<Property> getProperties() {
