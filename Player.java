@@ -1,6 +1,6 @@
 import  java.util.ArrayList;
 
-public class Player implements SerializableI {
+public class Player implements Serializable {
     private int playerId;
     private Color color;
     private String name;
@@ -15,6 +15,9 @@ public class Player implements SerializableI {
         this.balance = balance;
         this.bankrupt = bankrupt;
         properties = new ArrayList<>();
+    }
+    public Player(){
+        
     }
 
     public void resume(Terminal terminal, Player player){

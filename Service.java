@@ -11,6 +11,9 @@ public class Service extends Property {
             costStaying[i] = Integer.parseInt(segment[i+3]);
         }
     }
+    public Service(){
+        
+    }
 
     @Override
     public void doOperation(Player player, Terminal terminal) {

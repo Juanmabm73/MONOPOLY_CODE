@@ -19,6 +19,9 @@ public class PaymentCharge extends MonopolyCode{
             this.amount = 0;
         }
     }
+    public PaymentCharge(){
+        
+    }
 
     public void doOperation(Player player, Terminal terminal) {
         if (getAmount() < 0 ){

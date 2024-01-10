@@ -24,6 +24,9 @@ public class RepairsCard extends MonopolyCode {
         }
 
     }
+    public RepairsCard(){
+        
+    }
 
     @Override
     public void doOperation(Player player, Terminal terminal) {

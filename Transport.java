@@ -12,6 +12,9 @@ public class Transport extends Property{
              this.costStaying[i] = Integer.parseInt(segment[i+3]);        }
        
     }
+    public Transport(){
+        
+    }
 
     @Override
     public void doOperation(Player player, Terminal terminal) {

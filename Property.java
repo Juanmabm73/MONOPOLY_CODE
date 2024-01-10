@@ -13,6 +13,9 @@ public class Property extends MonopolyCode {
         this.mortgageValue = mortgageValue;
     }
 
+    public Property(){
+
+    }
     
     
     public String resumeString(){

@@ -16,6 +16,10 @@ public class Street extends Property{
         }
     }
 
+    public Street(){
+        
+    }
+
     
     public String toDetailedString(){ // se usa para mostrar el resumen general
         return super.toString() + " houses: " + getBuiltHouses() + ". Mortgaged: " + isMortaged() ;

@@ -1,20 +1,28 @@
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
 
-public class Game implements SerializableI {
+public class Game implements Serializable {
     private  MonopolyCode [] monopolyCodeArray = new MonopolyCode[81];
     private Terminal terminal; 
     private  Player[] playerArray = new Player [4];
 
-    public Game(Terminal terminal) {
+   
+  
+    public Game(MonopolyCode[] monopolyCodeArray, Terminal terminal, Player[] playerArray) {
+        this.monopolyCodeArray = monopolyCodeArray;
         this.terminal = terminal;
+        this.playerArray = playerArray;
+    }
+    public Game(){
+
     }
 
-    
-  
     private void loadMonopolyCodes()  {
         BufferedReader reader = null;
         try { reader = new BufferedReader(new FileReader("./files/properties.txt"));
@@ -68,9 +76,10 @@ public class Game implements SerializableI {
 
     public void play() {
         
-        Game game = new Game(terminal);
+         
         createPlayers();
         loadMonopolyCodes();
+        Game game = new Game(monopolyCodeArray, terminal, playerArray);
         while (playerArray.length >= 2) { //cambiar para que cuente los null
             
             
@@ -93,17 +102,27 @@ public class Game implements SerializableI {
             }
 
             removePlayer();
-            
-            terminal.show("### ### ### ### ###");
-            terminal.show("# PLAYERS SUMMARY #");
-            terminal.show("### ### ### ### ###");
 
+            try{
+                XMLEncoder encoder = new XMLEncoder(
+                    new BufferedOutputStream(
+                    new FileOutputStream("partida.xml"))
+                );
+                encoder.writeObject(game);
+                encoder.close();
+            }
+            catch (Exception e){
+                terminal.show("ERROR " + e);
+            }
+
+            terminal.show("# PLAYERS SUMMARY #");
             for (Player player : getPlayerArray()) {
                 if (player != null){
                     terminal.show(player.toString()+ " balance: " + player.getBalance() + ". Properties: ");
                     player.resume(terminal, player);
                 }
             }
+
         } //fin del while
     } //fin del metodo
 
@@ -118,7 +137,7 @@ public class Game implements SerializableI {
         }
     }
         
-
+   
 
         
 

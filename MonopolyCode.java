@@ -1,4 +1,4 @@
-public class MonopolyCode implements SerializableI {
+public class MonopolyCode implements Serializable {
     private int id;
     private String description;
     private Terminal terminal;
@@ -11,6 +11,10 @@ public class MonopolyCode implements SerializableI {
         this.terminal = terminal;
     }
 
+    public MonopolyCode(){
+
+    }
+    
     public void doOperation(Player player, Terminal terminal){
         
     };
