@@ -19,25 +19,29 @@ public class Transport extends Property{
        
         if (getOwner() == null) {
             terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros your balance will be " + (player.getBalance() - getPrice()) + " euros to buy the property");
-            terminal.show("For accept enter 1 for cancel enter 0");
-            do{
-                response = terminal.read();
-            } while (response != 0 || response != 1);
-            if (response == 1) {
-                player.pay(getPrice(),false, terminal);
-                setOwner(player);
+            if (player.pay(getPrice(), false, terminal)) {
+                terminal.show("For accept enter 1 for cancel enter 0");
+                do{
+                    response = terminal.read();
+                } while ((response != 0) && (response != 1));
+                if (response == 1) {
+                    player.setBalance(player.getBalance() - getPrice());
+                    setOwner(player);
 
-                if (player.getProperties() == null) {
-                    player.setProperties(new ArrayList<>());
+                    if (player.getProperties() == null) {
+                        player.setProperties(new ArrayList<>());
+                    }
+
+                    player.getProperties().add(this);
+                    
+                    showPurchaseSummary(getPrice(), player, terminal);
+                
+                } else if (response == 0) {
+                    terminal.show("Operation canceled");
                 }
 
-                player.getProperties().add(this);
-                setOwner(player);
-            showPurchaseSummary(getPrice(), player, terminal);
-            
-            } else if (response == 0) {
-                terminal.show("Operation canceled");
             }
+            
         } else if (getOwner() != player) {
             int numberTransport = 1;
 
@@ -48,9 +52,16 @@ public class Transport extends Property{
             }
 
             terminal.show("You are in " + getOwner() + " property you will pay" + getCostStaying()[numberTransport-1]);
-            player.pay(getCostStaying()[numberTransport-1], true, terminal);
-            getOwner().setBalance(getOwner().getBalance() + getCostStaying()[numberTransport-1]);
-            showPaymentSummary(getCostStaying()[numberTransport-1], player, terminal);
+            if (player.pay(getCostStaying()[numberTransport-1], true, terminal)){
+                player.setBalance(player.getBalance() - getCostStaying()[numberTransport-1]);
+                getOwner().setBalance(getOwner().getBalance() + getCostStaying()[numberTransport-1]);
+                showPaymentSummary(getCostStaying()[numberTransport-1], player, terminal);
+            } else {
+                player.traspaseProperties(getOwner());
+                terminal.show(player.toString() + " transferred his properties to " + getOwner().toString());
+
+            }
+            
         } else if (getOwner() == player) {
             doOwnerOperation(player, terminal);
 

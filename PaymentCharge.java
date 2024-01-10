@@ -21,10 +21,21 @@ public class PaymentCharge extends MonopolyCode{
     }
 
     public void doOperation(Player player, Terminal terminal) {
-        int amount = -this.amount; //paso a negativo para que funcione en pay
-        player.pay(amount, true, terminal);
-        // player.setBalance(player.getBalance() + this.amount);
-        terminal.show( "Balance: " + player.getBalance());
+        if (getAmount() < 0 ){
+            if (player.pay(-getAmount(), true, terminal)){
+            terminal.show(amount + "");
+            player.setBalance(player.getBalance() + getAmount());
+            terminal.show(player.toString() + " have paid " + -getAmount());
+            } else {
+                player.traspasePropertiesToBank();
+                terminal.show("The properties were traspased to the bank");
+            }
+        } else {
+            player.setBalance(player.getBalance()+getAmount());
+        }
+       
+        
+    
     }
 
     public int getAmount() {

@@ -55,15 +55,19 @@ public class Property extends MonopolyCode {
                 break;
             case 3: 
                 terminal.show("You are going to unmortgaged your property for" + (getMortgageValue() + (int) 0.1*getMortgageValue()));
-                terminal.show("Confirm opperation (0 = no/ 1 = yes)");
-                do {
-                    response = terminal.read();
-                } while ((response == 0) && (response == 1));
-                if ( response == 1){
-                    player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal);
-                } else {
-                    terminal.show("Operation cancelled");
+                if (player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal)){
+                    terminal.show("Confirm opperation (0 = no/ 1 = yes)");
+                    do {
+                        response = terminal.read();
+                    } while ((response == 0) && (response == 1));
+                    if ( response == 1){
+                        player.setBalance(getMortgageValue() - (int) 0.1*getMortgageValue());
+                        setMortaged(false);
+                    } else {
+                        terminal.show("Operation cancelled");
+                    }
                 }
+                
             }
     }   
     

@@ -18,27 +18,31 @@ public class Service extends Property {
         
         if (getOwner() == null) {
             terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros your balance will be " + (player.getBalance() - getPrice()) + " euros to buy the property" + getDescription());
-            terminal.show("For accept enter 1 for cancel enter 0.");
-            do{
-                response = terminal.read();
-            } while ((response == 0) && (response == 1));
-            
-            if (response == 1) {
-                player.pay(getPrice(),false, terminal);
-                setOwner(player);
+            if (player.pay(getPrice(),false, terminal)){
+                terminal.show("For accept enter 1 for cancel enter 0.");
+                do{
+                    response = terminal.read();
+                } while ((response != 0) && (response != 1));
+                
+                if (response == 1) {
+                    
+                    setOwner(player);
 
-                if (player.getProperties() == null) {
-                    player.setProperties(new ArrayList<>());
+                    if (player.getProperties() == null) {
+                        player.setProperties(new ArrayList<>());
+                    }
+                    
+                    player.setBalance(player.getBalance() - getPrice());
+                    player.getProperties().add(this);
+                    setOwner(player);
+                    showPurchaseSummary(getPrice(), player, terminal);
+
+                
+                } else if (response == 0){
+                    terminal.show("Operation canceled");
                 }
-
-                player.getProperties().add(this);
-                setOwner(player);
-            
-            } else if (response == 0){
-                terminal.show("Operation canceled");
             }
-            showPurchaseSummary(getPrice(), player, terminal);
-            // terminal.show( "Propiedades: " + player.getProperties());
+            
 
         } else if (getOwner() != player) {
             
@@ -57,13 +61,24 @@ public class Service extends Property {
             } while(dice<1 && dice>6);
             
             if(doubleService == false){ 
-                player.pay(dice*getCostStaying()[0], true, terminal);
-                getOwner().setBalance(getOwner().getBalance() + dice*getCostStaying()[0]);
-                showPaymentSummary(dice*getCostStaying()[0], player, terminal);
+                if (player.pay(dice*getCostStaying()[0], true, terminal)){
+                    player.setBalance(player.getBalance() - dice*getCostStaying()[0]);
+                    getOwner().setBalance(getOwner().getBalance() + dice*getCostStaying()[0]);
+                    showPaymentSummary(dice*getCostStaying()[0], player, terminal);
+                } else {
+                    player.traspaseProperties(getOwner());
+                    terminal.show(player.toString() + " transferred his properties to " + getOwner().toString());
+                }
+                
             } else{
-                player.pay(dice*getCostStaying()[1], true, terminal);
-                getOwner().setBalance(getOwner().getBalance() + dice*getCostStaying()[0]);
-                showPaymentSummary(dice*getCostStaying()[1], player, terminal);
+                if (player.pay(dice*getCostStaying()[1], true, terminal)){
+                    player.setBalance(player.getBalance() - dice*getCostStaying()[1]);
+                    getOwner().setBalance(getOwner().getBalance() + dice*getCostStaying()[1]);
+                    showPaymentSummary(dice*getCostStaying()[1], player, terminal);
+                } else {
+                    player.traspaseProperties(getOwner());
+                    terminal.show(player.toString() + " transferred his properties to " + getOwner().toString());
+                }
             }
             
         } else if (getOwner() == player) {

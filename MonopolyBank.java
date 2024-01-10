@@ -7,7 +7,5 @@ public class MonopolyBank {
         Game game =new Game(tt);
         
         game.play();
-
-        
     }
 }

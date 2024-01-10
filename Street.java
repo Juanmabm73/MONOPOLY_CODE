@@ -28,46 +28,54 @@ public class Street extends Property{
         int response;
 
         if (getOwner() == null) {
+            if(player.pay(getPrice(), false, terminal)){
             
-            terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros for " + getDescription() + " your balance will be " + (player.getBalance() - getPrice()) + " euros");
-            terminal.show("For accept enter 1 for cancel enter 0");
-            do {
-                response = terminal.read();
-            } while ((response != 0) && (response != 1));
+                terminal.show(player.toString() + " you are going to pay " + getPrice() + " euros for " + getDescription() + " your balance will be " + (player.getBalance() - getPrice()) + " euros");
+                terminal.show("For accept enter 1 for cancel enter 0");
+                
+                do {
+                    response = terminal.read();
+                } while ((response != 0) && (response != 1));
 
-            if (response == 1)  {
-                player.pay(getPrice(), false, terminal); //no es obligatorio
+                if (response == 1)  {
+                    
+                    player.setBalance(player.getBalance() - getPrice());
 
-                if (player.getProperties() == null) {
-                    player.setProperties(new ArrayList<>());
-                }   
+                    if (player.getProperties() == null) {
+                        player.setProperties(new ArrayList<>());
+                    }   
 
-                player.getProperties().add(this);
-                setOwner(player);
-            
-            } else if (response == 0){
-                terminal.show("Operation canceled");
+                    player.getProperties().add(this);
+                    setOwner(player);
+
+                    terminal.show(player.toString() + " has paid " + getPrice() + " euros for buy "+ getDescription() + " .Updated balance: " + player.getBalance());
+                    terminal.show(getDescription() + " has been added to " + player.toString() + " properties");
+                    terminal.show("Properties of " + player.toString() + ": " + player.getProperties());
+                
+                } else if (response == 0){
+                    terminal.show("Operation canceled");
+                }
+            } else {
+                terminal.show("Your balance is not enough");
             }
-
-            terminal.show(player.toString() + " has paid " + getPrice() + " euros for buy "+ getDescription() + " .Updated balance: " + player.getBalance());
-            terminal.show(getDescription() + " has been added to " + player.toString() + " properties");
-            terminal.show("Properties of " + player.toString() + ": " + player.getProperties());
+            
             
         } else if (getOwner() != player) {
+        
             if (isMortaged()) {
                 terminal.show("You are in " + getOwner() + "property but is Mortgaged you don't pay rent");
             } else {
-                terminal.show("You are in " + getOwner() +  " property you will pay: " + getCostStayingWithHouses()[getBuiltHouses()]);
-                terminal.show("NUMERO DE CASAS: "+getBuiltHouses() + "PRECIO: " + getCostStayingWithHouses()[getBuiltHouses()]);
-                player.pay(getCostStayingWithHouses()[getBuiltHouses()], true, terminal); //lo mandas a pago obligatorio
-                getOwner().setBalance(getOwner().getBalance() + getCostStayingWithHouses()[getBuiltHouses()]); //dueño recibe
-                if (player.isBankrupt()){
+                if (player.pay(getCostStayingWithHouses()[getBuiltHouses()], true, terminal)){
+                    terminal.show("You are in " + getOwner() +  " property you will pay: " + getCostStayingWithHouses()[getBuiltHouses()]);
+                    terminal.show("NUMERO DE CASAS: "+getBuiltHouses() + "PRECIO: " + getCostStayingWithHouses()[getBuiltHouses()]);
+                    getOwner().setBalance(getOwner().getBalance() + getCostStayingWithHouses()[getBuiltHouses()]); //dueño recibe
+                    player.setBalance(player.getBalance() - getCostStayingWithHouses()[getBuiltHouses()]);
+                    showPaymentSummary(getCostStayingWithHouses()[getBuiltHouses()], player, terminal);
+                } else {
                     player.traspaseProperties(getOwner());
                     terminal.show(player.toString() + " transferred his properties to " + getOwner().toString());
                 }
-                showPaymentSummary(getCostStayingWithHouses()[getBuiltHouses()], player, terminal);
             }
-            
         } else if (getOwner() == player) {
             doOwnerOperation(player, terminal);
         }
@@ -87,6 +95,9 @@ public class Street extends Property{
             terminal.show("3. Sell Houses of the Property");
         }
         int option = terminal.read();
+        if (isMortaged()){
+            terminal.show("4. Desmortgaged property");
+        }
         
         
         switch (option) {
@@ -113,17 +124,20 @@ public class Street extends Property{
                 terminal.show("At this moment you have " + getBuiltHouses() + " houses");
                 if (getBuiltHouses() == 4) {
                     terminal.show("You can only buy a Hotel for: " + getHousePrice() + "euros" );
-                    terminal.show("Do you want to continue (1 = yes/ 0= no)");
-                    do {
-                        response = terminal.read();
-                    } while ((response != 0)  && (response != 1));
+                    if (player.pay(getHousePrice(), false, terminal)){
+                        terminal.show("Do you want to continue (1 = yes/ 0= no)");
+                        do {
+                            response = terminal.read();
+                        } while ((response != 0)  && (response != 1));
 
-                    if (response == 1){
-                        player.pay(getHousePrice(), false, terminal);
-                        setBuiltHouses(5);
-                    } else if (response == 0){
-                        terminal.show("Operation cancelled");
+                        if (response == 1){
+                            player.setBalance(player.getBalance() - getHousePrice());
+                            setBuiltHouses(5);
+                        } else if (response == 0){
+                            terminal.show("Operation cancelled");
+                        }
                     }
+                    
                 } else if (getBuiltHouses() < 4) {
                     do{
                         terminal.show("You can buy " + (4-getBuiltHouses()) + " houses");
@@ -131,18 +145,22 @@ public class Street extends Property{
                         num = terminal.read();
                         
                     } while ((num<=1) && (num >= 4-getBuiltHouses()));
-                    terminal.show("You are going to buy " + num + " houses for " + num*getHousePrice());
-                    terminal.show("Do you accept operation ( 1 = yes / 0 = no)");
-                    do {
-                        response = terminal.read();
-                    } while ((response != 0) && (response != 1));
-                    if (response == 1){
-                        player.pay(num*getHousePrice(), false, terminal);
-                        setBuiltHouses(getBuiltHouses() + num);
-                        showPurchaseSummary(num, player, terminal);
-                    } else {    
-                        terminal.show("Operation canceled");
+                    
+                    if ( player.pay(num*getHousePrice(), false, terminal)){
+                        terminal.show("You are going to buy " + num + " houses for " + num*getHousePrice());
+                        terminal.show("Do you accept operation ( 1 = yes / 0 = no)");
+                        do {
+                            response = terminal.read();
+                        } while ((response != 0) && (response != 1));
+                        if (response == 1){
+                            player.setBalance(player.getBalance() - num*getHousePrice());
+                            setBuiltHouses(getBuiltHouses() + num);
+                            showPurchaseSummary(num, player, terminal);
+                        } else {    
+                            terminal.show("Operation canceled");
+                        }
                     }
+                    
                 } else {
                     terminal.show("At this moment your property is fully developed you can't buy anything more");
                 }
@@ -156,21 +174,40 @@ public class Street extends Property{
                         terminal.show("How many houses do you want to sell");
                         num = terminal.read();
                     } while(num<= 1 && num >= getBuiltHouses());
-
-                    terminal.show("You are going to sell" + num + " houses for " + "your balance will be" + player.getBalance()+(getHousePrice()/2 * num));
+                
+                    terminal.show("You are going to sell " + num + " houses for " + (getHousePrice()/2 * num )+ " your balance will be" +(player.getBalance()+(getHousePrice()/2 * num)));
                     terminal.show("Do you want to continue (1 = yes/0 = no)");
                     do {
                         response = terminal.read();
                     } while ((response != 0) && (response != 1));
 
                     if (response == 1){
-                        player.pay(-(getHousePrice()/2 * num), false, terminal);
+                        player.setBalance(player.getBalance() + (getHousePrice()/2 * num));
                         setBuiltHouses(getBuiltHouses() - num);
                     } else {
                         terminal.show("Operation cancelled");
                     }
+                    
                 }
                 break;
+            case 4: 
+                
+                terminal.show("You are going to unmortgaged your property for" + (getMortgageValue() + (int) 0.1*getMortgageValue()));
+                if (player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal)){
+                    terminal.show("Confirm opperation (0 = no/ 1 = yes)");
+                    do {
+                        response = terminal.read();
+                    } while ((response == 0) && (response == 1));
+                    if ( response == 1){
+                        player.setBalance(getMortgageValue() - (int) 0.1*getMortgageValue());
+                        setMortaged(false);
+                    } else {
+                        terminal.show("Operation cancelled");
+                    }
+                }
+                
+            
+            break;
 
             default:
                 terminal.show("Introduzca correctamente el numero");

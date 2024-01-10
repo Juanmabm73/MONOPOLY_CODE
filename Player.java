@@ -1,5 +1,5 @@
 import  java.util.ArrayList;
-import java.util.Scanner;
+
 public class Player implements SerializableI {
     private int playerId;
     private Color color;
@@ -30,98 +30,95 @@ public class Player implements SerializableI {
     }
 
 
-    public void pay(int price, boolean mandatory, Terminal terminal){
-        Scanner scanner =  new Scanner(System.in);
-        if (mandatory == false) {
-            if ((getBalance() - price) > 0) {
-                setBalance(getBalance() - price);
-            }
-            else if ((getBalance() - price) < 0) {
-                terminal.show("Insuficcient money. Do you want to sell? (yes/no)");
-                String response = scanner.nextLine();
-                if (response.equalsIgnoreCase("yes")){
-                    sellActives(price, false, terminal);
+    // public void pay(int price, boolean mandatory, Terminal terminal){
+    //     Scanner scanner =  new Scanner(System.in);
+    //     if (mandatory == false) {
+    //         if ((getBalance() - price) > 0) {
+    //             setBalance(getBalance() - price);
+    //         }
+    //         else if ((getBalance() - price) < 0) {
+    //             terminal.show("Insuficcient money. Do you want to sell? (yes/no)");
+    //             String response = scanner.nextLine();
+    //             if (response.equalsIgnoreCase("yes")){
+    //                 sellActives(price, false, terminal);
+    //             } else {
+    //                 terminal.show("Operation cancelled"); 
+    //             }                    
+    //         }
+    //     } else if (mandatory == true) {
+    //         if ((getBalance() - price) > 0) { 
+    //             setBalance(getBalance() - price);
+    //         } else if ((getBalance() - price) < 0){
+    //             sellActives(price, true, terminal);
+    //         }
+    //     }
+
+    // }
+
+    public boolean pay(int amount, boolean mandatory, Terminal terminal){
+        if (mandatory == true) {
+            if (patrimony() > amount) {
+                if (getBalance() > amount){
+                    return true; //gestionamos pagos en cada propiedad 
                 } else {
-                    terminal.show("Operation cancelled"); 
-                }                    
+                    while (getBalance() < amount){
+                        terminal.show("Objetive: " + amount);
+                        showList(terminal);
+                        terminal.show("Choose a number");
+                        int num =terminal.read();
+                        sellActives(num, terminal);
+                    }  
+                    return true; //cuando salga del while deberia de tener el dinero suficiente
+                }
+            }else { //no tiene suficiente patrimonio bancarota traspasamos donde toque
+                terminal.show("You don't have enough patrimony for pay you are in bankrupt");
+                setBankrupt(true);
+                //traspasar propiedades en player
+                return false; //no se efectua el pago por lo que traspasar a quien sea
             }
-        } else if (mandatory == true) {
-            if ((getBalance() - price) > 0) { 
-                setBalance(getBalance() - price);
-            } else if ((getBalance() - price) < 0){
-                sellActives(price, true, terminal);
+        } else { //no oblogatorio
+            if (getBalance() > amount) {
+                return true; //pagos en player
+            } else{
+                terminal.show("You don't have enough money");
+                return false;
             }
         }
-
     }
-
     
-    private void sellOrMortgaged(Terminal terminal) {
-        Scanner scanner = new Scanner(System.in);
-        int sales = 0;
-        int propertyValue = 0;
+
+    private void sellActives(int num, Terminal terminal) {
         int number = 0;
-        
-        showList(terminal);
-        terminal.show("Choose your Property id from list");
-        int num = scanner.nextInt();
-        scanner.nextLine();
-        if (canSell(num)) { //esto decide entre vender e hipotecar 
-            Property property = getProperties().get(num);
+        int propertyValue = 0;
+        Property property = getProperties().get(num);
+        if (canSell(num) == true){
             if (property instanceof Street) {
                 Street street = (Street) property;
                     do{
                         terminal.show("Built Houses " + street.getBuiltHouses());
                         terminal.show("Choose a number of houses to sell");
-                        number = scanner.nextInt();
-                        scanner.nextLine();
-                    } while(number>=1 && number<= street.getBuiltHouses());
+                        number =terminal.read();
+                    } while(number<=1 && number>= street.getBuiltHouses());
                     
-                    propertyValue = (street.getHousePrice()/ 2) * number;
+                    propertyValue += (street.getHousePrice()/ 2) * number;
                     
-                    sales += propertyValue;
                     setBalance(getBalance() + propertyValue);
                     street.setBuiltHouses(street.getBuiltHouses() - number);
             }
-        } else { 
+
+        } else {
             terminal.show("We are going to Mortgage");
-            Property property = getProperties().get(num);
-            propertyValue = property.getMortgageValue();
-            sales += property.getMortgageValue();
+            propertyValue += property.getMortgageValue();
             setBalance(getBalance() + propertyValue);
             property.setMortaged(true);
-            
-        }
-    }
 
-    private void sellActives(int target, boolean mandatory, Terminal terminal) {
-        Scanner scanner = new Scanner(System.in);
+        }
+
         
-        if (mandatory){
-        while (getBalance() < target) {
-            if (thereAreThingsToSell() == false) {
-                    setBankrupt(true);
-                    break;
-            } else{
-                    terminal.show("You need to mortgage");
-                    sellOrMortgaged(terminal);
-                
-            }
-        }
-        } else {
-            do{
-                sellOrMortgaged(terminal);
-                terminal.show("Do you want to continue selling (yes/no)");
-                String response = scanner.nextLine();
-                if (response.equalsIgnoreCase("no")) {
-                    break;
-                }
-            } while (getBalance() < target);
-        }
     }
 
     private boolean canSell(int num){ //comprueba si hay cosas para vender en la propiedad
-        System.out.println(num);
+        
         Property property = getProperties().get(num); //coge la propiedad con el num que es el id que hemos creado
             if (property instanceof Street ) {
                 Street street = (Street) property;
@@ -131,22 +128,6 @@ public class Player implements SerializableI {
             }    
     }
 
-    public boolean thereAreThingsToSell(){
-        for (Property properties : getProperties()) {
-            if (properties instanceof Street) {
-                Street street = (Street) properties;
-            
-                if(!properties.isMortaged() && street.getBuiltHouses() > 0 ){
-                    return true;
-                }
-
-            } else {
-                if(!properties.isMortaged()){
-                    return true;
-                }
-            }}
-        return false;
-    }
 
     private void showList(Terminal terminal) {
         int index = 0;
@@ -156,7 +137,7 @@ public class Player implements SerializableI {
             if (property instanceof Street){
                 Street street = (Street) property;
                 if (street.getBuiltHouses()>0){
-                    terminal.show("Id: " + index + " " + street.toString() + "Built Houses: " + street.getBuiltHouses() + "Sell price: " + street.getCostStayingWithHouses()[4]/2);
+                    terminal.show("Id: " + index + " " + street.toString() + " Built Houses: " + street.getBuiltHouses() + " Sell price: " + street.getHousePrice()/2 + "per house");
                 }
             }
             index++;
@@ -184,7 +165,38 @@ public class Player implements SerializableI {
             // traspaso de las propiedades pero todas hipotecadas revisar
 
         }
+    }
 
+    public void traspasePropertiesToBank(){
+        for (Property properties: getProperties()){
+            if (properties instanceof Street) {
+                Street street = (Street) properties;
+                street.setBuiltHouses(0);
+                street.setMortaged(false);
+                street.setOwner(null);
+            } else{
+                properties.setMortaged(false);
+                properties.setOwner(null);
+            }
+        }
+    }
+
+
+    public int patrimony(){
+        int totalValue = getBalance();
+        for (Property properties : getProperties()){
+            if (properties instanceof Street){
+                Street street = (Street) properties;
+                totalValue += street.getBuiltHouses() * street.getHousePrice() + street.getMortgageValue();
+            } else if (properties instanceof Transport){
+                Transport transport = (Transport) properties;
+                totalValue += transport.getMortgageValue();
+            } else if (properties instanceof Service){
+                Service service = (Service) properties;
+                totalValue += service.getMortgageValue();
+            }
+        }
+        return totalValue;
     }
     
     @Override

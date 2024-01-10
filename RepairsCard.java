@@ -33,16 +33,22 @@ public class RepairsCard extends MonopolyCode {
             if (property instanceof Street) {
                 Street street = (Street) property;
                 if (street.getBuiltHouses() <= 4) {
-                    total += street.getBuiltHouses() * this.amountForHouse;
+                    total += street.getBuiltHouses() * getAmountForHouse();
                 } else {
-                    total += this.amountForHotel;
+                    total += getAmountForHotel();
                 }
             }
         }
-    }
-    player.pay(total, true, terminal);
-    // total -= player.getBalance();
-    // player.setBalance(total);
+        }
+        if (player.pay(total, true, terminal)){
+            player.setBalance(player.getBalance() - total);
+            terminal.show(player.toString() + " have paid " + total + " euros to the bank");
+        }else {
+            player.traspasePropertiesToBank();
+            terminal.show("The properties were traspased to the bank");
+        }
+    
+    
     terminal.show(player.getBalance() + "");
     }
 
