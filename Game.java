@@ -25,7 +25,8 @@ public class Game implements Serializable {
 
     private void loadMonopolyCodes()  {
         BufferedReader reader = null;
-        try { reader = new BufferedReader(new FileReader("./files/properties.txt"));
+        try { 
+            reader = new BufferedReader(new FileReader("./files/properties.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 String [] segment = line.split(";");
@@ -106,7 +107,7 @@ public class Game implements Serializable {
             try{
                 XMLEncoder encoder = new XMLEncoder(
                     new BufferedOutputStream(
-                    new FileOutputStream("partida.xml"))
+                    new FileOutputStream("./files/partida.xml"))
                 );
                 encoder.writeObject(game);
                 encoder.close();
