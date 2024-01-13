@@ -20,6 +20,7 @@ public class Translator {
             String [] segment = line.split(";");
                 dictionary.put(segment[0], segment[1]); //lo metemos al diccionario con clave y traduccion;
             }
+            reader.close();
         } catch(Exception e){
             
         }

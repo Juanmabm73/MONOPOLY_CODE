@@ -1,0 +1,15 @@
+Welcome to Monopoly;Bienvenido a Monopoly
+Choose your idiom;Elige tu idioma
+1. Spanish;1. Español
+2. Euskera;2. Euskera
+3. English;3. Ingles
+Enter card code;Introduce el codigo de la carta
+Enter player id;Introduce el codigo del jugador
+This player is eliminated;Este jugador esta eliminado
+ERROR  + %s;ERROR + %s
+# PLAYERS SUMMARY #;# RESUMEN DE LOS JUGADORES #
+%s+  balance:   %s  . Properties: %s;%s+ Saldo: %s . Propiedades: %s 
+Player %s is bankrupt and has been removed from the game; El jugador 
+Name of %s player:;Nombre del jugador %s
+
+

@@ -3,7 +3,7 @@ public abstract class Terminal {
         
     }
 
-    public abstract void show(String s);
+    public abstract void show(String s, Object...args);
 
     public abstract int read();
 }
