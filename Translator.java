@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 
-public class Translator {
+public class Translator implements Serializable {
     private Map<String, String> dictionary = new HashMap<>();
     private String language;
     
@@ -30,7 +30,7 @@ public class Translator {
     public String Translate(String sentence){
         String translation = dictionary.get(sentence);
         if (translation == null){
-            return "No se encontro la traduccion para" + sentence;
+            return "No se encontro la traduccion para " + sentence;
         } else {
             return translation;
         }

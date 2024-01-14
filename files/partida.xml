@@ -473,9 +473,6 @@
    </void>
    <void index="21">
     <object class="Street" id="Street11">
-     <void property="builtHouses">
-      <int>3</int>
-     </void>
      <void property="costStayingWithHouses">
       <void index="0">
        <int>18</int>
@@ -505,78 +502,13 @@
      <void property="id">
       <int>21</int>
      </void>
-     <void property="owner">
-      <object class="Player" id="Player0">
-       <void property="balance">
-        <int>404</int>
-       </void>
-       <void property="color">
-        <object class="java.lang.Enum" method="valueOf">
-         <class>Color</class>
-         <string>RED</string>
-        </object>
-       </void>
-       <void property="name">
-        <string>as</string>
-       </void>
-       <void property="properties">
-        <object class="java.util.ArrayList">
-         <void method="add">
-          <object idref="Street11"/>
-         </void>
-         <void method="add">
-          <object class="Street" id="Street12">
-           <void property="builtHouses">
-            <int>3</int>
-           </void>
-           <void property="costStayingWithHouses">
-            <void index="0">
-             <int>28</int>
-            </void>
-            <void index="1">
-             <int>150</int>
-            </void>
-            <void index="2">
-             <int>450</int>
-            </void>
-            <void index="3">
-             <int>1000</int>
-            </void>
-            <void index="4">
-             <int>1200</int>
-            </void>
-            <void index="5">
-             <int>1400</int>
-            </void>
-           </void>
-           <void property="description">
-            <string>GRAN VÍA</string>
-           </void>
-           <void property="housePrice">
-            <int>200</int>
-           </void>
-           <void property="id">
-            <int>34</int>
-           </void>
-           <void property="owner">
-            <object idref="Player0"/>
-           </void>
-           <void property="terminal">
-            <object idref="TextTerminal0"/>
-           </void>
-          </object>
-         </void>
-        </object>
-       </void>
-      </object>
-     </void>
      <void property="terminal">
       <object idref="TextTerminal0"/>
      </void>
     </object>
    </void>
    <void index="23">
-    <object class="Street" id="Street13">
+    <object class="Street" id="Street12">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>18</int>
@@ -606,13 +538,36 @@
      <void property="id">
       <int>23</int>
      </void>
+     <void property="owner">
+      <object class="Player" id="Player0">
+       <void property="balance">
+        <int>1507</int>
+       </void>
+       <void property="color">
+        <object class="java.lang.Enum" method="valueOf">
+         <class>Color</class>
+         <string>RED</string>
+        </object>
+       </void>
+       <void property="name">
+        <string>ass</string>
+       </void>
+       <void property="properties">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object idref="Street12"/>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
      <void property="terminal">
       <object idref="TextTerminal0"/>
      </void>
     </object>
    </void>
    <void index="24">
-    <object class="Street" id="Street14">
+    <object class="Street" id="Street13">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>20</int>
@@ -661,7 +616,7 @@
     </object>
    </void>
    <void index="26">
-    <object class="Street" id="Street15">
+    <object class="Street" id="Street14">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>22</int>
@@ -697,7 +652,7 @@
     </object>
    </void>
    <void index="27">
-    <object class="Street" id="Street16">
+    <object class="Street" id="Street15">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>22</int>
@@ -751,7 +706,7 @@
     </object>
    </void>
    <void index="29">
-    <object class="Street" id="Street17">
+    <object class="Street" id="Street16">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>24</int>
@@ -787,7 +742,7 @@
     </object>
    </void>
    <void index="31">
-    <object class="Street" id="Street18">
+    <object class="Street" id="Street17">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>26</int>
@@ -823,7 +778,7 @@
     </object>
    </void>
    <void index="32">
-    <object class="Street" id="Street19">
+    <object class="Street" id="Street18">
      <void property="costStayingWithHouses">
       <void index="0">
        <int>26</int>
@@ -859,7 +814,63 @@
     </object>
    </void>
    <void index="34">
-    <object idref="Street12"/>
+    <object class="Street" id="Street19">
+     <void property="costStayingWithHouses">
+      <void index="0">
+       <int>28</int>
+      </void>
+      <void index="1">
+       <int>150</int>
+      </void>
+      <void index="2">
+       <int>450</int>
+      </void>
+      <void index="3">
+       <int>1000</int>
+      </void>
+      <void index="4">
+       <int>1200</int>
+      </void>
+      <void index="5">
+       <int>1400</int>
+      </void>
+     </void>
+     <void property="description">
+      <string>GRAN VÍA</string>
+     </void>
+     <void property="housePrice">
+      <int>200</int>
+     </void>
+     <void property="id">
+      <int>34</int>
+     </void>
+     <void property="owner">
+      <object class="Player" id="Player1">
+       <void property="balance">
+        <int>1472</int>
+       </void>
+       <void property="color">
+        <object class="java.lang.Enum" method="valueOf">
+         <class>Color</class>
+         <string>BLACK</string>
+        </object>
+       </void>
+       <void property="name">
+        <string>as</string>
+       </void>
+       <void property="properties">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object idref="Street19"/>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void property="terminal">
+      <object idref="TextTerminal0"/>
+     </void>
+    </object>
    </void>
    <void index="35">
     <object class="Transport">
@@ -1449,23 +1460,7 @@
     </object>
    </void>
    <void index="2">
-    <object class="Player">
-     <void property="balance">
-      <int>1500</int>
-     </void>
-     <void property="color">
-      <object class="java.lang.Enum" method="valueOf">
-       <class>Color</class>
-       <string>BLACK</string>
-      </object>
-     </void>
-     <void property="name">
-      <string>as</string>
-     </void>
-     <void property="properties">
-      <object class="java.util.ArrayList"/>
-     </void>
-    </object>
+    <object idref="Player1"/>
    </void>
    <void index="3">
     <object class="Player">

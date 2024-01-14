@@ -33,30 +33,6 @@ public class Player implements Serializable {
     }
 
 
-    // public void pay(int price, boolean mandatory, Terminal terminal){
-    //     Scanner scanner =  new Scanner(System.in);
-    //     if (mandatory == false) {
-    //         if ((getBalance() - price) > 0) {
-    //             setBalance(getBalance() - price);
-    //         }
-    //         else if ((getBalance() - price) < 0) {
-    //             terminal.show("Insuficcient money. Do you want to sell? (yes/no)");
-    //             String response = scanner.nextLine();
-    //             if (response.equalsIgnoreCase("yes")){
-    //                 sellActives(price, false, terminal);
-    //             } else {
-    //                 terminal.show("Operation cancelled"); 
-    //             }                    
-    //         }
-    //     } else if (mandatory == true) {
-    //         if ((getBalance() - price) > 0) { 
-    //             setBalance(getBalance() - price);
-    //         } else if ((getBalance() - price) < 0){
-    //             sellActives(price, true, terminal);
-    //         }
-    //     }
-
-    // }
 
     public boolean pay(int amount, boolean mandatory, Terminal terminal){
         if (mandatory == true) {
@@ -65,7 +41,7 @@ public class Player implements Serializable {
                     return true; //gestionamos pagos en cada propiedad 
                 } else {
                     while (getBalance() < amount){
-                        terminal.show("Objetive: " + amount);
+                        terminal.show("Objetive: %d", amount);
                         showList(terminal);
                         terminal.show("Choose a number");
                         int num =terminal.read();
@@ -98,7 +74,7 @@ public class Player implements Serializable {
             if (property instanceof Street) {
                 Street street = (Street) property;
                     do{
-                        terminal.show("Built Houses " + street.getBuiltHouses());
+                        terminal.show("Built Houses %d",street.getBuiltHouses());
                         terminal.show("Choose a number of houses to sell");
                         number =terminal.read();
                     } while(number<=1 && number>= street.getBuiltHouses());
@@ -140,7 +116,7 @@ public class Player implements Serializable {
             if (property instanceof Street){
                 Street street = (Street) property;
                 if (street.getBuiltHouses()>0){
-                    terminal.show("Id: " + index + " " + street.toString() + " Built Houses: " + street.getBuiltHouses() + " Sell price: " + street.getHousePrice()/2 + "per house");
+                    terminal.show("Id: %d %s ,Built houses %d, Sell price %d per house", index, street.toString(), street.getBuiltHouses(), street.getHousePrice()/2);
                 }
             }
             index++;
@@ -152,10 +128,10 @@ public class Player implements Serializable {
             if (property instanceof Street){
                 Street street =  (Street) property;
                 if (street.getBuiltHouses() == 0) {
-                    terminal.show("Id: " + index + " " + street.toString() + "Mortgage Value: " + street.getMortgageValue());
+                    terminal.show("Id: %d %s, Mortgage Value: %d",index, street.toString(), street.getMortgageValue());
                 }
             } else if (property instanceof Service || property instanceof Transport) {
-                terminal.show("Id: " + index + " " + property.toString() + "Mortgage Value: " + property.getMortgageValue());
+                terminal.show("Id: %d %s, Mortgage Value: %d", index, property.toString(), property.getMortgageValue());
             }
         index++;
         }

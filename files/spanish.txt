@@ -1,1 +1,71 @@
-asasas
+Welcome to Monopoly;Bienvenido a Monopoly
+Choose your idiom;Elige tu idioma
+1. Spanish;1. Español
+2. Euskera;2. Euskera
+3. English;3. Inglés
+Enter card code;Introduce el código de la tarjeta
+Enter player id;Introduce el id del jugador
+This player is eliminated;Este jugador ha sido eliminado
+ERROR + %s;ERROR + %s
+# PLAYERS SUMMARY #;# RESUMEN DE JUGADORES #
+%s balance: %s. Properties: %s;%s balance: %s. Propiedades: %s
+Player %s is bankrupt and has been removed from the game;El jugador %s ha quebrado y ha sido eliminado del juego
+Name of %s player:;Nombre del jugador %s:
+1. Start Game;1. Comenzar juego
+2. Load Game;2. Cargar juego
+Write the name of the game;Escribe el nombre del juego
+%s have paid %d;%s ha pagado %d
+The properties were traspased to the bank;Las propiedades fueron traspasadas al banco
+Objective: %d;Objetivo: %d
+Choose a number;Elige un número
+You don't have enough patrimony for pay you are in bankrupt;No tienes suficiente patrimonio para pagar, estás en quiebra
+You don't have enough money;No tienes suficiente dinero
+Built Houses %d;Casas construidas %d
+Choose a number of houses to sell;Elige un número de casas para vender
+We are going to Mortgage;Vamos a hipotecar
+Id: %d %s, Built houses %d, Sell price %d per house;Id: %d %s, Casas construidas %d, Precio de venta %d por casa
+List of properties with possible sales;Lista de propiedades con posibles ventas
+List of properties with possible mortgage;Lista de propiedades con posible hipoteca
+Id: %d %s, Mortgage Value: %d;Id: %d %s, Valor de hipoteca: %d
+You are in your property what do you want to do?;Estás en tu propiedad ¿qué quieres hacer?
+1. Mortgage property;1. Hipotecar propiedad
+2. Nothing;2. Nada
+3. Unmortgage;3. Deshipotecar
+You are going to mortgage your property for: %d euros;Vas a hipotecar tu propiedad por: %d euros
+Do you want to continue (1 = yes/ 0 = no);¿Quieres continuar (1 = sí/ 0 = no)?
+Operation Cancelled;Operación cancelada
+Operation Canceled; Operación cancelada
+Operation cancelled;Operación cancelad
+No operation;Ninguna operación
+You are going to unmortgage your property for %d;Vas a deshipotecar tu propiedad por %d
+%s have paid %d euros to the bank;%s ha pagado %d euros al banco
+%s you are going to pay %d euros your balance will be %d euros to buy the property %s;%s vas a pagar %d euros tu saldo será de %d euros para comprar la propiedad %s
+You are in %s property;Estás en la propiedad de %s
+What number did you get on the dice;Qué número obtuviste en los dados
+%s transferred his properties to %s;%s transfirió sus propiedades a %s
+%s has paid %d euros to %s;%s ha pagado %d euros a %s
+%s has received %d. Updated balance %d;%s ha recibido %d. Saldo actualizado %d
+%s has paid %d euros for buy %s;%s ha pagado %d euros por comprar %s
+%s has been added to %s properties;%s ha sido añadido a las propiedades de %s
+%s you are going to pay %d euros for %s your balance will be %d euros;%s vas a pagar %d euros por %s tu saldo será de %d euros
+Your balance is not enough;Tu saldo no es suficiente
+2. Buy houses or Hotels;2. Comprar casas u hoteles
+You are in %s property. But is mortgaged you don't pay rent;Estás en la propiedad de %s. Pero está hipotecada no pagas alquiler
+3. Sell Houses of the Property;3. Vender casas de la propiedad
+4. Unmortgage property;4. Deshipotecar propiedad
+You are going to mortgage your property for: %d euros;Vas a
+hipotecar tu propiedad por: %d euros
+You can't Mortgage this property, you must sell all houses before;No puedes hipotecar esta propiedad, debes vender todas las casas antes
+At this moment you have %d houses;En este momento tienes %d casas
+You can only buy a Hotel for: %d euros;Solo puedes comprar un hotel por: %d euros
+You can buy %d houses;Puedes comprar %d casas
+How many houses do you want to buy;Cuántas casas quieres comprar
+You are going to buy %d houses for %d;Vas a comprar %d casas por %d
+At this moment your property is fully developed you can't buy anything more;En este momento tu propiedad está completamente desarrollada, no puedes comprar nada más
+You don't have any house to sell;No tienes ninguna casa para vender
+You have %d houses to sell;Tienes %d casas para vender
+How many houses do you want to sell;Cuántas casas quieres vender
+You are going to sell %d houses for %d;Vas a vender %d casas por %d
+You are going to unmortgage your property for %d;Vas a deshipotecar tu propiedad por %d
+%s you have bought %d on the property %s;%s has comprado %d en la propiedad %s
+You have bought a hotel, your property %s is fully developed;Has comprado un hotel, tu propiedad %s está completamente desarrollada

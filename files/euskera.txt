@@ -1,1 +1,70 @@
-asas
+Welcome to Monopoly;Ongi etorri Monopolyra
+Choose your idiom;Hautatu zure hizkuntza
+1. Spanish;1. Gaztelania
+2. Euskera;2. Euskera
+3. English;3. Ingelesa
+Enter card code;Sartu txartelaren kodea
+Enter player id;Sartu jokalariaren id-a
+This player is eliminated;Jokalari hau eliminatu da
+ERROR + %s;AKATSA + %s
+# PLAYERS SUMMARY #;# JOKALARIEN LABURPENA #
+%s balance: %s. Properties: %s;%s saldoa: %s. Jabetzak: %s
+Player %s is bankrupt and has been removed from the game;Jokalari %s bankarrota egin du eta jokotik kendu da
+Name of %s player:;%s jokalariaren izena:
+1. Start Game;1. Jokoari hasiera eman
+2. Load Game;2. Kargatu Jokoa
+Write the name of the game;Idatzi jokoaren izena
+%s have paid %d;%s-ek %d ordaindu du
+The properties were traspased to the bank;Jabetzak bankura pasatu dira
+Objective: %d;Helburua: %d
+Choose a number;Aukeratu zenbaki bat
+You don't have enough patrimony for pay you are in bankrupt;Ez duzu nahikoa ondare ordaintzeko, bankarrota zaude
+You don't have enough money;Ez duzu diru nahikorik
+Built Houses %d;Eraikitako etxeak %d
+Choose a number of houses to sell;Aukeratu saltzeko etxe kopuru bat
+We are going to Mortgage;Hipotekatu egingo dugu
+Id: %d %s, Built houses %d, Sell price %d per house;Id: %d %s, Eraikitako etxeak %d, Salmenta prezioa etxe bakoitzeko %d
+List of properties with possible sales;Salmenta posibleak dituzten jabetzen zerrenda
+List of properties with posible mortgage;Hipoteka posibleak dituzten jabetzen zerrenda
+Id: %d %s, Mortgage Value: %d;Id: %d %s, Hipoteka Balioa: %d
+You are in your property what do you want to do?;Zure jabetzan zaude, zer egin nahi duzu?
+1. Mortgage property;1. Jabetza hipotekatu
+2. Nothing;2. Ezer ez
+3. Unmortgage;3. Hipoteka kendu
+You are going to mortgage your property for: %d euros;Zure jabetza hipotekatuko duzu: %d eurotan
+Do you want to continue (1 = yes/ 0 = no);Jarraitu nahi duzu (1 = bai/ 0 = ez)
+Operation Cancelled;Operazioa bertan behera utzi da
+No operation;Ez dago operaziorik
+You are going to unmortgage your property for %d;Zure jabetza deshipotekatuko duzu %d eurotan
+%s have paid %d euros to the bank;%s-ek %d euro ordaindu dizkio bankuari
+%s you are going to pay %d euros your balance will be %d euros to buy the property %s;%s, %d euro ordainduko dituzu, zure saldoa %d euro izango da %s jabetza erosteko
+You are in %s property;Zu %s-ren jabetzan zaude
+What number did you get on the dice;Zenbat atera duzu dadoetan
+%s transferred his properties to %s;%s-ek bere jabetzak %s-ri transferitu dizkio
+%s has paid %d euros to %s;%s-ek %d euro ordaindu dizkio %s-ri
+%s has received %d. Updated balance %d;%s-ek %d jaso du. Eguneratutako saldoa %d
+%s has paid %d euros for buy %s;%s-ek %d euro ordaindu ditu %s erosteko
+%s has been added to %s properties;%s %s
+-ren jabetzetara gehitu da
+%s you are going to pay %d euros for %s your balance will be %d euros;%s, %d euro ordainduko dituzu %s-erako, zure saldoa %d euro izango da
+Your balance is not enough;Zure saldoa ez da nahikoa
+
+Buy houses or Hotels;2. Etxeak edo Hotelak erosi
+You are in %s property. But is mortgaged you don't pay rent;Zu %s-ren jabetzan zaude. Baina hipotekatuta dago, ez duzu alokairurik ordaindu behar
+Sell Houses of the Property;3. Jabetzako etxeak saltzea
+Unmortgaged property;4. Deshipotekatutako jabetza
+You are going to mortgage your property for: %d euros;Zure jabetza %d eurotan hipotekatuko duzu
+You can't Mortgage this property, you must sell all houses before;Ezin duzu jabetza hau hipotekatu, lehenbizi etxe guztiak saldu behar dituzu
+At this moment you have %d houses;Une honetan %d etxe dituzu
+You can only buy a Hotel for: %d euros;Hotel bat bakarrik erosi dezakezu: %d eurotan
+You can buy %d houses; %d etxe erosi ditzakezu
+How many houses do you want to buy;Zenbat etxe erosi nahi dituzu
+You are going to buy %d houses for %d; %d etxe erosi behar dituzu %d eurotan
+At this moment your property is fully developed you can't buy anything more;Une honetan zure jabetza osorik garatuta dago, ezin duzu ezer gehiago erosi
+You don't have any house to sell;Ez daukazu saltzeko etxerik
+You have %d houses to sell;%d etxe dituzu salgai
+How many houses do you want to sell;Zenbat etxe saldu nahi dituzu
+You are going to sell %d houses for %d;%d etxe salduko dituzu %d eurotan
+You are going to unmortgage your property for %d;Zure jabetza deshipotekatuko duzu %d eurotan
+%s you have bought %d on the property %s;%s, %d erosi duzu %s jabetzan
+You have bought a hotel, your property %s is fully developed;Hotel bat erosi duzu, zure jabetza %s osorik garatuta dago

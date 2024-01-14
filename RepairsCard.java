@@ -45,14 +45,13 @@ public class RepairsCard extends MonopolyCode {
         }
         if (player.pay(total, true, terminal)){
             player.setBalance(player.getBalance() - total);
-            terminal.show(player.toString() + " have paid " + total + " euros to the bank");
+            terminal.show("%s have paid %d euros to the bank", player.toString(),total);
         }else {
             player.traspasePropertiesToBank();
             terminal.show("The properties were traspased to the bank");
         }
     
     
-    terminal.show(player.getBalance() + "");
     }
 
     public int getAmountForHouse() {

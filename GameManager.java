@@ -19,7 +19,7 @@ public class GameManager {
     }
 
     public void askForResumeGame(Terminal tt){
-        tt.show("Dame el nombre de tu partida");
+        tt.show("Write the name of the game");
         tt.read();
     }
 }

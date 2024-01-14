@@ -38,7 +38,7 @@ public class Property extends MonopolyCode {
         switch (option) {
             case 1:
 
-                terminal.show("You are going to mortgaged your property for: " + getMortgageValue() + "euros");
+                terminal.show("You are going to mortgaged your property for: %d euros", getMortgageValue());
                 terminal.show("Do you want to continue (1 = yes/ 0 = no)");
                 do {
                     response = terminal.read();
@@ -57,9 +57,9 @@ public class Property extends MonopolyCode {
                 
                 break;
             case 3: 
-                terminal.show("You are going to unmortgaged your property for" + (getMortgageValue() + (int) 0.1*getMortgageValue()));
+                terminal.show("You are going to unmortgaged your property for %d",(getMortgageValue() + (int) 0.1*getMortgageValue()));
                 if (player.pay(getMortgageValue() + (int) 0.1*getMortgageValue(), false, terminal)){
-                    terminal.show("Confirm opperation (0 = no/ 1 = yes)");
+                    terminal.show("Do you want to continue (1 = yes/ 0 = no)");
                     do {
                         response = terminal.read();
                     } while ((response == 0) && (response == 1));

@@ -1,15 +1,71 @@
-Welcome to Monopoly;Bienvenido a Monopoly
-Choose your idiom;Elige tu idioma
-1. Spanish;1. Español
+Welcome to Monopoly;Welcome to Monopoly
+Choose your idiom;Choose your idiom
+1. Spanish;1. Spanish
 2. Euskera;2. Euskera
-3. English;3. Ingles
-Enter card code;Introduce el codigo de la carta
-Enter player id;Introduce el codigo del jugador
-This player is eliminated;Este jugador esta eliminado
+3. English;3. English
+Enter card code;Enter card code
+Enter player id;Enter player id
+This player is eliminated;This player is eliminated
 ERROR  + %s;ERROR + %s
-# PLAYERS SUMMARY #;# RESUMEN DE LOS JUGADORES #
-%s+  balance:   %s  . Properties: %s;%s+ Saldo: %s . Propiedades: %s 
-Player %s is bankrupt and has been removed from the game; El jugador 
-Name of %s player:;Nombre del jugador %s
-
+# PLAYERS SUMMARY #;# PLAYERS SUMMARY #
+%s+  balance:   %s  . Properties: %s;%s+ balance: %s . properties: %s 
+Player %s is bankrupt and has been removed from the game;Player %s is bankrupt and has been removed from the game 
+Name of %s player:;Name of %s player
+1. Start Game;1. Start Game
+2. Load Game;2. Load Game
+Write the name of the game;Write the name of the game
+%s have paid %d;%s have paid %d
+The properties were traspased to the bank;The properties were traspased to the bank
+Objetive: %d;Objetive: %d
+Choose a number;Choose a number
+You don't have enough patrimony for pay you are in bankrupt;You don't have enough patrimony for pay you are in bankrupt
+You don't have enough money;You don't have enough money
+Built Houses %d;Built Houses %d
+Choose a number of houses to sell;Choose a number of houses to sell
+We are going to Mortgage;We are going to Mortgage
+Id: %d %s ,Built houses %d, Sell price %d per house;Id: %d %s ,Built houses %d, Sell price %d per house
+List of properties with posible sales;List of properties with posible sales
+List of properties with posible mortgage;List of properties with posible mortgage
+Id: %d %s, Mortgage Value: %d;Id: %d %s, Mortgage Value: %d
+You are in your property what do you want to do?;You are in your property what do you want to do?
+1. Mortgage property;1. Mortgage property
+2. Nothing;2. Nothing
+3. Unmortgage;3. Unmortgage
+You are going to mortgaged your property for: %d euros;You are going to mortgaged your property for: %d euros
+Do you want to continue (1 = yes/ 0 = no);Do you want to continue (1 = yes/ 0 = no)
+Operation Cancelled;Operation Cancelled
+Operation Canceled; Operation Cancelled
+Operation cancelled;Operation Cancelled
+No opperation;No opperation
+You are going to unmortgaged your property for %d;You are going to unmortgaged your property for %d
+%s have paid %d euros to the bank;%s have paid %d euros to the bank
+The properties were traspased to the bank;The properties were traspased to the bank;
+%s you are going to pay %d euros your balance will be %d euros to buy the property %s;%s you are going to pay %d euros your balance will be %d euros to buy the property %s
+You are in %s property;You are in %s property
+What number did you get on the dice;What number did you get on the dice
+%s transfered his properties to %s;%s transfered his properties to %s
+%s has paid %d euros to %s;%s has paid %d euros to %s
+%s has recibed %d. Updated balance %d;%s has recibed %d. Updated balance %d
+%s has paid %d euros for buy %s;%s has paid %d euros for buy %s
+%s has been added to %s properties;%s has been added to %s properties
+%s you are going to pay %d euros for %s your balance will be %d euros;%s you are going to pay %d euros for %s your balance will be %d euros
+Your balance is not enough;Your balance is not enough
+2. Buy houses or Hotels;2. Buy houses or Hotels
+You are in %s property. But is mortgaged you don't pay rent;You are in %s property. But is mortgaged you don't pay rent
+3. Sell Houses of the Property;3. Sell Houses of the Property
+4. Unmortgaged property;4. Unmortgaged property
+You are going to mortgaged your property for: %d euros;You are going to mortgaged your property for: %d euros;
+You can't Mortgage this property, you must sell all houses before;You can't Mortgage this property, you must sell all houses before
+At this moment you have %d houses;At this moment you have %d houses
+You can only buy a Hotel for: %d euros;You can only buy a Hotel for: %d euros
+You can buy %d houses;You can buy %d houses
+How many houses do you want to buy;How many houses do you want to buy
+You are going to buy %d houses for %d;You are going to buy %d houses for %d
+At this moment your property is fully developed you can't buy anything more;At this moment your property is fully developed you can't buy anything more
+You don't have any house to sell;You don't have any house to sell
+You have %d houses to sell;You have %d houses to sell
+How many houses do you want to sell;How many houses do you want to sell
+You are going to unmortgaged your property for %d;You are going to unmortgaged your property for %d
+%s you have bought %d on the property %s;% you have bought %d on the property %s
+You have bought an hotel, your property %s is fully developed;You have bought an hotel, your property %s is fully developed
 

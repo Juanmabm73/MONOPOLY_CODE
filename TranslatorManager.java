@@ -1,4 +1,4 @@
-public class TranslatorManager {
+public class TranslatorManager implements Serializable {
     private Translator currentIdiom;
     public Translator [] translators =  new Translator[3];
 
