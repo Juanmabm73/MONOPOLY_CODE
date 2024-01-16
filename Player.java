@@ -25,9 +25,9 @@ public class Player implements Serializable {
             for (Property properties : player.getProperties()) {
                 if (properties instanceof Street){
                     Street street = (Street) properties;
-                    terminal.show(street.toDetailedString()); //llamamos al "toString" de street
+                    terminal.show("%s houses: %d. Mortgaged: %s",street.getDescription(), street.getBuiltHouses(),street.isMortaged());; //llamamos al "toString" de street
                 } else{
-                    terminal.show(properties.resumeString());
+                    terminal.show("%s Mortgaged: %s", properties.getDescription(), properties.isMortaged());
                 }
         }
     }
@@ -116,7 +116,7 @@ public class Player implements Serializable {
             if (property instanceof Street){
                 Street street = (Street) property;
                 if (street.getBuiltHouses()>0){
-                    terminal.show("Id: %d %s ,Built houses %d, Sell price %d per house", index, street.toString(), street.getBuiltHouses(), street.getHousePrice()/2);
+                    terminal.show("Id: %d %s ,Built houses %d, Sell price %d per house", index, street.getDescription(), street.getBuiltHouses(), street.getHousePrice()/2);
                 }
             }
             index++;
@@ -128,10 +128,10 @@ public class Player implements Serializable {
             if (property instanceof Street){
                 Street street =  (Street) property;
                 if (street.getBuiltHouses() == 0) {
-                    terminal.show("Id: %d %s, Mortgage Value: %d",index, street.toString(), street.getMortgageValue());
+                    terminal.show("Id: %d %s, Mortgage Value: %d",index, street.getDescription(), street.getMortgageValue());
                 }
             } else if (property instanceof Service || property instanceof Transport) {
-                terminal.show("Id: %d %s, Mortgage Value: %d", index, property.toString(), property.getMortgageValue());
+                terminal.show("Id: %d %s, Mortgage Value: %d", index, property.getDescription(), property.getMortgageValue());
             }
         index++;
         }
@@ -178,10 +178,7 @@ public class Player implements Serializable {
         return totalValue;
     }
     
-    @Override
-    public String toString() {
-        return "Player" + " " + this.playerId;
-    }
+    
     public Color getColor() {
         return color;
     }

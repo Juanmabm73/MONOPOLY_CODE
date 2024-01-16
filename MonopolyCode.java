@@ -1,4 +1,4 @@
-public class MonopolyCode implements Serializable {
+public abstract class MonopolyCode implements Serializable {
     private int id;
     private String description;
     private Terminal terminal;
@@ -20,10 +20,8 @@ public class MonopolyCode implements Serializable {
     };
 
 
-    @Override
-    public String toString() {
-        return this.description;
-    }
+    
+    
 
     
 

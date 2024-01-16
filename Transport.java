@@ -21,7 +21,7 @@ public class Transport extends Property{
         int response;
        
         if (getOwner() == null) {
-            terminal.show("%s you are going to pay %d euros your balance will be %d euros to buy the property %s",player.toString(),getPrice(), (player.getBalance() - getPrice()), getDescription());
+            terminal.show("Player %d you are going to pay %d euros your balance will be %d euros to buy the property %s;",player.getPlayerId(),getPrice(), (player.getBalance() - getPrice()), getDescription());
             if (player.pay(getPrice(), false, terminal)) {
                 terminal.show("Do you want to continue (1 = yes/ 0 = no)");
                 do{
@@ -61,7 +61,7 @@ public class Transport extends Property{
                 showPaymentSummary(getCostStaying()[numberTransport-1], player, terminal);
             } else {
                 player.traspaseProperties(getOwner());
-                terminal.show("%s transfered his properties to %s", player.toString(),getOwner().toString());
+                terminal.show("Player %d transfered his properties to palyer %d", player.getPlayerId(),getOwner().getPlayerId());
 
             }
             
@@ -74,14 +74,14 @@ public class Transport extends Property{
 
     private void showPaymentSummary(int amount, Player player, Terminal terminal){
     
-        terminal.show("%s has paid %d euros to %s", player.toString(),amount,getOwner().toString());
-        terminal.show("%s has recibed %d. Updated balance %d", getOwner().toString(), amount, getOwner().getBalance());
+        terminal.show("Player %d has paid %d euros to player %d", player.getPlayerId(),amount,getOwner().getPlayerId());
+        terminal.show("Player %d has recibed %d. Updated balance %d", getOwner().getPlayerId(), amount, getOwner().getBalance());
         
     }
 
     private void showPurchaseSummary(int amount, Player player, Terminal terminal) {
-        terminal.show("%s has paid %d euros for buy %s", player.toString(), amount, getDescription());
-        terminal.show("%s has been added to %s properties", getDescription(), player.toString());
+        terminal.show("Player %d has paid %d euros for buy %s", player.getPlayerId(), amount, getDescription());
+        terminal.show("%s has been added to player %d properties", getDescription(), player.getPlayerId());
         
     }
 

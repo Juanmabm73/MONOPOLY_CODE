@@ -1,6 +1,9 @@
+import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,19 +12,6 @@ import java.util.Scanner;
 
 public class Game implements Serializable {
 
-    private static final String WELCOME_MESSAGE = "Welcome to Monopoly";
-    private static final String CHOOSE_IDIOM_MESSAGE = "Choose your idiom";
-    private static final String SPANISH_OPTION_MESSAGE = "1. Spanish";
-    private static final String EUSKERA_OPTION_MESSAGE = "2. Euskera";
-    private static final String ENGLISH_OPTION_MESSAGE = "3. English";
-    private static final String ENTER_CARD_CODE_MESSAGE = "Enter card code";
-    private static final String ENTER_PLAYER_ID_MESSAGE = "Enter player id";
-    private static final String PLAYER_ELIMINATED_MESSAGE = "This player is eliminated";
-    private static final String ERROR_MESSAGE_PREFIX = "ERROR " + "%s"; // Usado como prefijo
-    private static final String PLAYERS_SUMMARY_MESSAGE = "# PLAYERS SUMMARY #"; // Usado como prefijo
-    private static final String PLAYER_BANKRUPT_MESSAGE = "Player %d is bankrupt and has been removed from the game"; // Usado como sufijo
-    private static final String PLAYER_INFO_FORMAT = "%s balance: %d. Properties: %s"; // Usado para formatear con String.format
-    private static final String NAME_OF_PLAYER_MESSAGE = "Name of %s player:"; // Usado como prefijo
     
 
 
@@ -87,7 +77,7 @@ public class Game implements Serializable {
 
             for (int i = 0; i < 4; i++) {
                 Color color = Color.values()[i];
-                terminal.show(Game.NAME_OF_PLAYER_MESSAGE, color.toString());
+                terminal.show("Name of %s player:", color.toString());
                 String playerName = scanner.nextLine();
                 playerArray[i] = (new Player(i+1, color, playerName, 1500, false));
             }
@@ -96,13 +86,14 @@ public class Game implements Serializable {
 
     public void play() {
         int idiomNumber;
+
         
         do {
             terminal.show("Welcome to Monopoly");
             terminal.show("Choose your idiom");
-            terminal.show(Game.SPANISH_OPTION_MESSAGE);
-            terminal.show(Game.EUSKERA_OPTION_MESSAGE);
-            terminal.show(Game.ENGLISH_OPTION_MESSAGE);
+            terminal.show("1. Spanish");
+            terminal.show("2. Euskera");
+            terminal.show("3. English");
             idiomNumber= terminal.read();
 
         } while(idiomNumber<=1 && idiomNumber>3);
@@ -130,19 +121,19 @@ public class Game implements Serializable {
         while (playerArray.length >= 2) { //cambiar para que cuente los null
             
             
-            terminal.show(Game.ENTER_CARD_CODE_MESSAGE);
+            terminal.show("Enter card code");
             int id = terminal.read();
-            terminal.show(Game.ENTER_PLAYER_ID_MESSAGE);
+            terminal.show("Enter player id");
             int playerId = terminal.read();
 
             for (int i = 0; i < getMonopolyCodeArray().length; i++) {
                 if (getMonopolyCodeArray()[i] != null && getMonopolyCodeArray()[i].getId() == id)  {
-                    terminal.show(getMonopolyCodeArray()[i].toString());
+                    terminal.show("Card: %s", getMonopolyCodeArray()[i].getDescription());
                     if(getPlayerArray()[playerId-1] != null){
                         getMonopolyCodeArray()[i].doOperation(getPlayerArray()[playerId - 1],terminal); //posicion del array no indice
                         break;
                     } else{
-                        terminal.show(Game.PLAYER_ELIMINATED_MESSAGE);
+                        terminal.show("This player is eliminated");
                     }
                     
                 }
@@ -159,13 +150,13 @@ public class Game implements Serializable {
                 encoder.close();
             }
             catch (Exception e){
-                terminal.show(Game.ERROR_MESSAGE_PREFIX, e);
+                terminal.show("ERROR %s", e);
             }
 
-            terminal.show(Game.PLAYERS_SUMMARY_MESSAGE);
+            terminal.show("# PLAYERS SUMMARY #");
             for (Player player : getPlayerArray()) {
                 if (player != null){
-                    terminal.show( Game.PLAYER_INFO_FORMAT,player.toString(), player.getBalance(), player.getProperties());
+                    terminal.show( "Player %d balance: %d. Properties:",player.getPlayerId(), player.getBalance());
                     player.resume(terminal, player);
                 }
             }
@@ -178,13 +169,13 @@ public class Game implements Serializable {
         for (int i = 0; i < getPlayerArray().length; i++){
             if((getPlayerArray()[i] != null) && (getPlayerArray()[i].isBankrupt())){
                 getPlayerArray()[i] = null;
-                terminal.show(Game.PLAYER_BANKRUPT_MESSAGE, (i+1));
+                terminal.show("Player %d is bankrupt and has been removed from the game", (i+1));
                 break;
             }
         }
     }
         
-   
+
 
         
 

@@ -8,13 +8,13 @@ Enter player id;Enter player id
 This player is eliminated;This player is eliminated
 ERROR  + %s;ERROR + %s
 # PLAYERS SUMMARY #;# PLAYERS SUMMARY #
-%s+  balance:   %s  . Properties: %s;%s+ balance: %s . properties: %s 
+Player %d balance: %d. Properties:;Player %d balance: %d. Properties:
 Player %s is bankrupt and has been removed from the game;Player %s is bankrupt and has been removed from the game 
 Name of %s player:;Name of %s player
 1. Start Game;1. Start Game
 2. Load Game;2. Load Game
 Write the name of the game;Write the name of the game
-%s have paid %d;%s have paid %d
+Player %d have paid %d;Player %d have paid %d
 The properties were traspased to the bank;The properties were traspased to the bank
 Objetive: %d;Objetive: %d
 Choose a number;Choose a number
@@ -38,17 +38,18 @@ Operation Canceled; Operation Cancelled
 Operation cancelled;Operation Cancelled
 No opperation;No opperation
 You are going to unmortgaged your property for %d;You are going to unmortgaged your property for %d
-%s have paid %d euros to the bank;%s have paid %d euros to the bank
+Player %d have paid %d euros to the bank;Player %d have paid %d euros to the bank
 The properties were traspased to the bank;The properties were traspased to the bank;
-%s you are going to pay %d euros your balance will be %d euros to buy the property %s;%s you are going to pay %d euros your balance will be %d euros to buy the property %s
+Player %d you are going to pay %d euros your balance will be %d euros to buy the property %s;Player %d you are going to pay %d euros your balance will be %d euros to buy the property %s
 You are in %s property;You are in %s property
 What number did you get on the dice;What number did you get on the dice
-%s transfered his properties to %s;%s transfered his properties to %s
-%s has paid %d euros to %s;%s has paid %d euros to %s
-%s has recibed %d. Updated balance %d;%s has recibed %d. Updated balance %d
-%s has paid %d euros for buy %s;%s has paid %d euros for buy %s
-%s has been added to %s properties;%s has been added to %s properties
-%s you are going to pay %d euros for %s your balance will be %d euros;%s you are going to pay %d euros for %s your balance will be %d euros
+Player %d transfered his properties to palyer %d;Player %d transfered his properties to player %d
+Player %d has paid %d euros to player %d;Player %d has paid %d euros to player %d
+Player %d has paid %d euros for buy %s. Updated balance: %d;Player %d has paid %d euros for buy %s. Updated balance: %d
+Player %d has recibed %d. Updated balance %d;Player %d has recibed %d. Updated balance %d
+Player %d has paid %d euros for buy %s;Player %d has paid %d euros for buy %s
+%s has been added to player %d properties;%s has been added to player %d properties
+Player %d you are going to pay %d euros for %s your balance will be %d euros;Player %d you are going to pay %d euros for %s your balance will be %d euros
 Your balance is not enough;Your balance is not enough
 2. Buy houses or Hotels;2. Buy houses or Hotels
 You are in %s property. But is mortgaged you don't pay rent;You are in %s property. But is mortgaged you don't pay rent
@@ -56,7 +57,7 @@ You are in %s property. But is mortgaged you don't pay rent;You are in %s proper
 4. Unmortgaged property;4. Unmortgaged property
 You are going to mortgaged your property for: %d euros;You are going to mortgaged your property for: %d euros;
 You can't Mortgage this property, you must sell all houses before;You can't Mortgage this property, you must sell all houses before
-At this moment you have %d houses;At this moment you have %d houses
+At this moment you have %d houses on %s;At this moment you have %d houses on %s
 You can only buy a Hotel for: %d euros;You can only buy a Hotel for: %d euros
 You can buy %d houses;You can buy %d houses
 How many houses do you want to buy;How many houses do you want to buy
@@ -66,6 +67,15 @@ You don't have any house to sell;You don't have any house to sell
 You have %d houses to sell;You have %d houses to sell
 How many houses do you want to sell;How many houses do you want to sell
 You are going to unmortgaged your property for %d;You are going to unmortgaged your property for %d
-%s you have bought %d on the property %s;% you have bought %d on the property %s
+Player %d you have bought %d on the property %s;Player %d you have bought %d on the property %s
 You have bought an hotel, your property %s is fully developed;You have bought an hotel, your property %s is fully developed
+%s houses: %d . Mortgaged: %s;%s houses: %d . Mortgaged: %s
+Player %d has paid %d euros for buy %s;Player %d has paid %d euros for buy %s
+%s has been added to player %d properties; %s has been added to player %d properties
+Player %d transfered his properties to player %d;Player %d transfered his properties to player %d
+Player %d has paid %d euros to player %d;Player %d has paid %d euros to player %d
+Player %d you are going to pay %d euros your balance will be %d euros to buy the property %s;Player %d you are going to pay %d euros your balance will be %d euros to buy the property %s
+Card: %s;Card: %s
+%s houses: %d. Mortgaged: %s;%s houses: %d. Mortgaged: %s
+
 

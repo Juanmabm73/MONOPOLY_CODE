@@ -538,29 +538,6 @@
      <void property="id">
       <int>23</int>
      </void>
-     <void property="owner">
-      <object class="Player" id="Player0">
-       <void property="balance">
-        <int>1507</int>
-       </void>
-       <void property="color">
-        <object class="java.lang.Enum" method="valueOf">
-         <class>Color</class>
-         <string>RED</string>
-        </object>
-       </void>
-       <void property="name">
-        <string>ass</string>
-       </void>
-       <void property="properties">
-        <object class="java.util.ArrayList">
-         <void method="add">
-          <object idref="Street12"/>
-         </void>
-        </object>
-       </void>
-      </object>
-     </void>
      <void property="terminal">
       <object idref="TextTerminal0"/>
      </void>
@@ -845,14 +822,14 @@
       <int>34</int>
      </void>
      <void property="owner">
-      <object class="Player" id="Player1">
+      <object class="Player" id="Player0">
        <void property="balance">
         <int>1472</int>
        </void>
        <void property="color">
         <object class="java.lang.Enum" method="valueOf">
          <class>Color</class>
-         <string>BLACK</string>
+         <string>RED</string>
         </object>
        </void>
        <void property="name">
@@ -1460,7 +1437,23 @@
     </object>
    </void>
    <void index="2">
-    <object idref="Player1"/>
+    <object class="Player">
+     <void property="balance">
+      <int>1500</int>
+     </void>
+     <void property="color">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>Color</class>
+       <string>BLACK</string>
+      </object>
+     </void>
+     <void property="name">
+      <string>as</string>
+     </void>
+     <void property="properties">
+      <object class="java.util.ArrayList"/>
+     </void>
+    </object>
    </void>
    <void index="3">
     <object class="Player">

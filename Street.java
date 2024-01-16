@@ -21,9 +21,7 @@ public class Street extends Property{
     }
 
     
-    public String toDetailedString(){ // se usa para mostrar el resumen general
-        return super.toString() + " houses: " + getBuiltHouses() + ". Mortgaged: " + isMortaged() ;
-    }
+    
 
 
     @Override
@@ -34,7 +32,7 @@ public class Street extends Property{
         if (getOwner() == null) {
             if(player.pay(getPrice(), false, terminal)){
             
-                terminal.show("%s you are going to pay %d euros for %s your balance will be %d euros",player.toString(),getPrice(), getDescription(), (player.getBalance() - getPrice()));
+                terminal.show("Player %d you are going to pay %d euros for %s your balance will be %d euros",player.getPlayerId(),getPrice(), getDescription(), (player.getBalance() - getPrice()));
                 terminal.show("Do you want to continue (1 = yes/ 0 = no)");
                 
                 do {
@@ -52,8 +50,8 @@ public class Street extends Property{
                     player.getProperties().add(this);
                     setOwner(player);
 
-                    terminal.show("%s has paid %d euros for buy %s. Updated balance: %d",player.toString(), getPrice(), getDescription(),player.getBalance());
-                    terminal.show("%s has been added to %s properties", getDescription(), player.toString());
+                    terminal.show("Player %d has paid %d euros for buy %s. Updated balance: %d",player.getPlayerId(), getPrice(), getDescription(),player.getBalance());
+                    terminal.show("%s has been added to player %d properties", getDescription(), player.getPlayerId());
                     
                 
                 } else if (response == 0){
@@ -76,7 +74,7 @@ public class Street extends Property{
                     showPaymentSummary(getCostStayingWithHouses()[getBuiltHouses()], player, terminal);
                 } else {
                     player.traspaseProperties(getOwner());
-                    terminal.show("%s transfered his properties to %s",player.toString(),getOwner().toString());
+                    terminal.show("Player %d transfered his properties to player %d",player.getPlayerId(),getOwner().getPlayerId());
                 }
             }
         } else if (getOwner() == player) {
@@ -222,14 +220,14 @@ public class Street extends Property{
 
     private void showPaymentSummary(int amount, Player player, Terminal terminal){
     
-        terminal.show("%s has paid %d euros to %s", player.toString(), amount, getOwner().toString());
+        terminal.show("Player %d has paid %d euros to player %d", player.getPlayerId(), amount, getOwner().getPlayerId());
         
         
     }
 
     private void showPurchaseSummary(int houses, Player player, Terminal terminal) {
         if (getBuiltHouses() <= 4) {
-            terminal.show("%s you have bought %d on the property %s", player.toString(),houses, getDescription());
+            terminal.show("Player %d you have bought %d on the property %s", player.getPlayerId(),houses, getDescription());
             terminal.show("At this moment you have %d houses on %s",getBuiltHouses(),getDescription());
         } else if (getBuiltHouses() == 5) {
             terminal.show("You have bought an hotel, your property %s is fully developed", getDescription());

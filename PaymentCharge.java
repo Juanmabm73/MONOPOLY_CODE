@@ -26,9 +26,8 @@ public class PaymentCharge extends MonopolyCode{
     public void doOperation(Player player, Terminal terminal) {
         if (getAmount() < 0 ){
             if (player.pay(-getAmount(), true, terminal)){
-            terminal.show(amount + "");
             player.setBalance(player.getBalance() + getAmount());
-            terminal.show("%s have paid %d", player.toString(),-getAmount());
+            terminal.show("Player %d have paid %d", player.getPlayerId(),-getAmount());
             } else {
                 player.traspasePropertiesToBank();
                 terminal.show("The properties were traspased to the bank");

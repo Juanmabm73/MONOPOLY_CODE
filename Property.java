@@ -18,9 +18,7 @@ public class Property extends MonopolyCode {
     }
     
     
-    public String resumeString(){
-        return getDescription() + " " + this.mortaged;
-    }
+    
 
     public void doOwnerOperation(Player player, Terminal terminal) {
         
